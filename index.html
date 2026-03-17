@@ -82,13 +82,12 @@
             cursor: pointer;
             transition: background-color 0.2s;
             font-family: 'Pretendard', sans-serif;
+            white-space: nowrap;
         }
 
         .btn:hover { background-color: var(--btn-hover); }
         .btn-outline { background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
         .btn-outline:hover { background-color: var(--primary-color); color: white; }
-
-        .bpm-display { display: inline-block; min-width: 65px; text-align: center; font-weight: bold; }
 
         .card {
             background-color: var(--card-bg);
@@ -141,19 +140,6 @@
         summary { font-weight: 600; cursor: pointer; color: var(--text-main); }
         .details-content { margin-top: 0.8rem; white-space: pre-wrap; }
 
-        #random-result {
-            display: none;
-            background: linear-gradient(135deg, var(--primary-color), var(--btn-hover));
-            color: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        #random-result h3 { margin-top: 0; }
-        #random-result ul { list-style: none; padding: 0; }
-        #random-result li { margin-bottom: 0.5rem; font-size: 1.1rem; }
-
     </style>
 </head>
 <body>
@@ -167,14 +153,6 @@
         <div class="controls">
             <input type="text" id="searchInput" class="search-box" placeholder="곡명, 날짜, 키(Key) 검색..." onkeyup="filterSetlists()">
             <button class="btn btn-outline" onclick="toggleTheme()">🌙 다크 모드</button>
-            <button class="btn" onclick="generateRandomJam()">🎸 랜덤 잼 추출</button>
-            <button class="btn" onclick="tapTempo()">⏱ BPM 탭: <span id="bpmText" class="bpm-display">--</span></button>
-        </div>
-
-        <div id="random-result">
-            <h3>🎲 오늘의 즉흥 잼 세션 콘티</h3>
-            <ul id="random-list"></ul>
-            <button class="btn btn-outline" style="border-color:white; color:white; margin-top:10px;" onclick="document.getElementById('random-result').style.display='none'">닫기</button>
         </div>
 
         <div id="setlist-container"></div>
@@ -471,62 +449,6 @@
         // 다크모드 토글
         function toggleTheme() {
             document.body.classList.toggle('dark-theme');
-        }
-
-        // BPM 탭 템포 기능
-        let tapTimes = [];
-        function tapTempo() {
-            const now = Date.now();
-            tapTimes.push(now);
-            if (tapTimes.length > 4) tapTimes.shift(); // 최근 4번의 탭만 유지
-            
-            if (tapTimes.length >= 2) {
-                let diffs = [];
-                for(let i=1; i<tapTimes.length; i++) {
-                    diffs.push(tapTimes[i] - tapTimes[i-1]);
-                }
-                const avgDiff = diffs.reduce((a, b) => a + b) / diffs.length;
-                const bpm = Math.round(60000 / avgDiff);
-                
-                // 너무 빠르거나 느린 예외값 처리 (초기화)
-                if(bpm > 250 || bpm < 40) {
-                    tapTimes = [now];
-                    document.getElementById('bpmText').innerText = "탭...";
-                } else {
-                    document.getElementById('bpmText').innerText = bpm;
-                }
-            } else {
-                document.getElementById('bpmText').innerText = "탭...";
-            }
-            
-            // 2초 동안 입력이 없으면 초기화
-            clearTimeout(window.bpmTimeout);
-            window.bpmTimeout = setTimeout(() => { tapTimes = []; }, 2000);
-        }
-
-        // 랜덤 잼 세션 추출기
-        function generateRandomJam() {
-            let allSongs = [];
-            setlists.forEach(setlist => {
-                setlist.songs.forEach(song => {
-                    // 중복 방지 로직 (제목 기준)
-                    if (!allSongs.some(s => s.title === song.title)) {
-                        allSongs.push(song);
-                    }
-                });
-            });
-
-            // 피셔-예이츠 셔플
-            for (let i = allSongs.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [allSongs[i], allSongs[j]] = [allSongs[j], allSongs[i]];
-            }
-
-            const picked = allSongs.slice(0, 3);
-            const listEl = document.getElementById('random-list');
-            listEl.innerHTML = picked.map(song => `<li>🎵 ${song.title} <span style="opacity:0.8; font-size:0.9em;">(${song.key})</span></li>`).join('');
-            
-            document.getElementById('random-result').style.display = 'block';
         }
 
         // 초기 렌더링
