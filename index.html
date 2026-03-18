@@ -14,6 +14,9 @@
             --text-muted: #7F8C8D;
             --border-color: #E2E8F0;
             --btn-hover: #357ABD;
+            --notice-bg: #FFF3CD;
+            --notice-text: #856404;
+            --notice-border: #FFEEBA;
         }
 
         body.dark-theme {
@@ -24,6 +27,9 @@
             --text-muted: #9E9E9E;
             --border-color: #404040;
             --btn-hover: #4A89DC;
+            --notice-bg: #4D3800;
+            --notice-text: #FFD966;
+            --notice-border: #664D03;
         }
 
         body { font-family: 'Pretendard', sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; margin: 0; padding: 0; transition: background-color 0.3s, color 0.3s; }
@@ -31,6 +37,23 @@
         header h1 { margin: 0; font-size: 1.8rem; font-weight: 700; }
         header p { margin: 0.5rem 0 0; color: var(--text-muted); font-size: 1rem; }
         .container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+
+        /* 공지사항 배너 */
+        .announcement {
+            background-color: var(--notice-bg);
+            color: var(--notice-text);
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--notice-border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        .announcement-icon { font-size: 1.2rem; }
 
         .controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; background: var(--card-bg); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .search-box { flex: 1; min-width: 200px; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-color); color: var(--text-main); font-family: 'Pretendard', sans-serif; }
@@ -48,10 +71,7 @@
 
         .card { background-color: var(--card-bg); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); position: relative; }
         
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .date-badge { background-color: var(--primary-color); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; }
-        .copy-btn { background: none; border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.3rem 0.6rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-family: 'Pretendard'; transition: 0.2s; }
-        .copy-btn:hover { background: var(--border-color); color: var(--text-main); }
+        .date-badge { display: inline-block; background-color: var(--primary-color); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; }
 
         .song-list { list-style: none; padding: 0; margin: 0; }
         .song-list li { padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; }
@@ -66,10 +86,6 @@
         details { margin-top: 1rem; background: var(--bg-color); padding: 0.8rem; border-radius: 8px; font-size: 0.9rem; color: var(--text-muted); }
         summary { font-weight: 600; cursor: pointer; color: var(--text-main); }
         .details-content { margin-top: 0.8rem; white-space: pre-wrap; }
-        
-        /* 알림 토스트 */
-        #toast { visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; z-index: 1; left: 50%; transform: translateX(-50%); bottom: 30px; font-size: 0.9rem; opacity: 0; transition: opacity 0.3s; }
-        #toast.show { visibility: visible; opacity: 1; }
     </style>
 </head>
 <body>
@@ -80,6 +96,12 @@
     </header>
 
     <div class="container">
+        
+        <div class="announcement">
+            <span class="announcement-icon">📢</span>
+            <span><strong>공지사항:</strong> 보면대를 꼭 정리해주시기바랍니다.</span>
+        </div>
+
         <div class="controls">
             <input type="text" id="searchInput" class="search-box" placeholder="곡명, 날짜, 키(Key) 검색..." onkeyup="filterSetlists()">
             <button class="btn btn-outline" onclick="toggleStats()">📊 찬양 통계</button>
@@ -93,8 +115,6 @@
 
         <div id="setlist-container"></div>
     </div>
-
-    <div id="toast">📋 마크다운이 복사되었습니다!</div>
 
     <script>
         const setlists = [
@@ -342,7 +362,7 @@
             const container = document.getElementById('setlist-container');
             container.innerHTML = '';
             
-            data.forEach((setlist, idx) => {
+            data.forEach((setlist) => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 
@@ -366,32 +386,11 @@
                 ` : '';
 
                 card.innerHTML = `
-                    <div class="card-header">
-                        <div class="date-badge">${setlist.date}</div>
-                        <button class="copy-btn" onclick="copyMarkdown(${idx})">📋 마크다운 복사</button>
-                    </div>
+                    <div class="date-badge">${setlist.date}</div>
                     <ul class="song-list">${songsHtml}</ul>
                     ${notesHtml}
                 `;
                 container.appendChild(card);
-            });
-        }
-
-        // 마크다운 복사 기능
-        function copyMarkdown(idx) {
-            const setlist = setlists[idx];
-            let md = `### 🎵 ${setlist.date} 주일 찬양 콘티\n\n`;
-            setlist.songs.forEach((song, i) => {
-                md += `${i + 1}. **${song.title}** (${song.key})\n`;
-            });
-            if (setlist.notes) {
-                md += `\n> **진행 메모:**\n> ${setlist.notes.replace(/\n/g, '\n> ')}\n`;
-            }
-
-            navigator.clipboard.writeText(md).then(() => {
-                const toast = document.getElementById("toast");
-                toast.className = "show";
-                setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2000);
             });
         }
 
@@ -405,7 +404,7 @@
 
             const songCounts = {};
             setlists.forEach(s => s.songs.forEach(song => {
-                // 부제 제거 및 정리 후 카운트 (예: "예수님 찬양 - 사람을 보며" -> "예수님 찬양")
+                // 부제 제거 및 정리 후 카운트
                 let cleanTitle = song.title.split(' - ')[0].split(' / ')[0].split(' + ')[0].replace(/ \(.*\)/, '').trim();
                 songCounts[cleanTitle] = (songCounts[cleanTitle] || 0) + 1;
             }));
