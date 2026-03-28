@@ -46,6 +46,7 @@
 
         .card { background-color: var(--card-bg); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .date-badge { display: inline-block; background-color: var(--primary-color); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; }
+        
         .song-list { list-style: none; padding: 0; margin: 0; }
         .song-list li { padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
         .song-list li:last-child { border-bottom: none; }
@@ -53,22 +54,42 @@
         .song-title { font-weight: 600; font-size: 1.05rem; }
         .song-key { background-color: var(--border-color); padding: 0.2rem 0.5rem; border-radius: 6px; font-size: 0.8rem; font-weight: 800; margin-left: 5px; }
         .song-comment { margin-top: 0.5rem; background-color: var(--comment-bg); color: var(--comment-text); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; display: inline-block; }
+        
         .links { display: flex; gap: 12px; }
-        .yt-link, .sheet-link { text-decoration: none; font-size: 1.2rem; filter: grayscale(100%); transition: 0.2s; }
+        .yt-link, .sheet-link { text-decoration: none; font-size: 1.2rem; filter: grayscale(100%); transition: 0.2s; cursor: pointer; }
         .yt-link:hover, .sheet-link:hover { filter: grayscale(0%); transform: scale(1.1); }
 
-        /* 모달창 스타일 (악보 보관함용) */
+        /* 악보 전용 라이트박스(모달) */
+        #sheetModal { 
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.9); 
+            z-index: 2000; 
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #modalImg { max-width: 95%; max-height: 85%; object-fit: contain; border-radius: 4px; }
+        .modal-close-btn { 
+            position: absolute; top: 20px; right: 20px; 
+            background: white; color: black; border: none; 
+            padding: 10px 20px; border-radius: 30px; font-weight: bold; cursor: pointer;
+        }
+        #modalCaption { color: white; margin-top: 15px; font-size: 1.2rem; font-weight: bold; }
+
+        /* 기존의 보관함 모달 */
         #libraryModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-color); z-index: 1000; overflow-y: auto; padding: 2rem 1rem; }
         .modal-content { max-width: 700px; margin: 0 auto; }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 2px solid var(--primary-color); padding-bottom: 1rem; }
-        .library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
+        .library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
         .library-item { background: var(--card-bg); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; cursor: pointer; transition: 0.2s; }
         .library-item:hover { transform: translateY(-3px); border-color: var(--primary-color); }
-        .library-item p { margin: 10px 0 0; font-weight: 600; font-size: 0.9rem; }
 
         .all-sheets-area { margin-top: 1.5rem; border-top: 2px solid var(--border-color); padding-top: 1.5rem; display: none; }
         .sheet-item { margin-bottom: 2rem; text-align: center; }
-        .full-sheet-img { width: 100%; border-radius: 8px; border: 1px solid var(--border-color); }
+        .full-sheet-img { width: 100%; border-radius: 8px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -83,6 +104,12 @@
             </div>
         </div>
         <div id="setlist-container"></div>
+    </div>
+
+    <div id="sheetModal" onclick="closeSheet()">
+        <button class="modal-close-btn">닫기 (돌아가기)</button>
+        <img id="modalImg" src="" alt="악보 확대">
+        <div id="modalCaption"></div>
     </div>
 
     <div id="libraryModal">
@@ -116,7 +143,6 @@
             { date: "2026-01-25", songs: [{ title: "보혈을 지나", key: "G" }, { title: "당신은 영광의 왕", key: "G" }] },
             { date: "2025-10-26", songs: [{ title: "실로암", key: "C" }, { title: "난 예수가 좋다오", key: "A" }, { title: "나의 가장 낮은 마음", key: "A" }, { title: "하늘소망", key: "A" }] },
             { date: "2023-12-08", songs: [{ title: "축복송 (때로는 너의 앞에)", key: "D" }, { title: "주 예수 내 맘에", key: "Ab" }, { title: "부르신 곳에서", key: "E" }] }
-            // ... (기존 데이터 유지)
         ];
 
         const globalSheetMap = {};
@@ -128,20 +154,36 @@
                 const hasAnySheet = set.songs.some(s => s.sheet || globalSheetMap[s.title]);
                 const songsHtml = set.songs.map((s, i) => {
                     const sheetPath = s.sheet || globalSheetMap[s.title];
-                    return `<li><div class="song-header"><div><span class="song-title">${i+1}. ${s.title}</span><span class="song-key">${s.key}</span></div><div class="links"><a href="https://www.youtube.com/results?search_query=${s.title} 찬양" target="_blank" class="yt-link">▶️</a>${sheetPath ? `<a href="${sheetPath}" target="_blank" class="sheet-link">🎼</a>` : ''}</div></div>${s.comment ? `<div class="song-comment">${s.comment}</div>` : ''}</li>`;
+                    return `<li><div class="song-header"><div><span class="song-title">${i+1}. ${s.title}</span><span class="song-key">${s.key}</span></div><div class="links"><a href="https://www.youtube.com/results?search_query=${s.title} 찬양" target="_blank" class="yt-link">▶️</a>${sheetPath ? `<a onclick="openSheet('${sheetPath}', '${s.title}')" class="sheet-link">🎼</a>` : ''}</div></div>${s.comment ? `<div class="song-comment">${s.comment}</div>` : ''}</li>`;
                 }).join('');
-                return `<div class="card"><div class="date-badge">${set.date}</div><ul class="song-list">${songsHtml}</ul>${hasAnySheet ? `<button class="btn" style="width:100%; margin-top:1.2rem; border-color:var(--border-color); color:var(--text-muted);" onclick="toggleSheets(${idx})">🖼️ 전체 악보 펼쳐보기</button>` : ''}<div id="sheet-area-${idx}" class="all-sheets-area">${set.songs.map(s => { const path = s.sheet || globalSheetMap[s.title]; return path ? `<div class="sheet-item"><p>${s.title}</p>${s.comment ? `<div class="song-comment" style="margin-bottom:10px;">${s.comment}</div>` : ''}<img src="${path}" class="full-sheet-img"></div>` : ''; }).join('')}</div></div>`;
+                return `<div class="card"><div class="date-badge">${set.date}</div><ul class="song-list">${songsHtml}</ul>${hasAnySheet ? `<button class="btn" style="width:100%; margin-top:1.2rem; border-color:var(--border-color); color:var(--text-muted);" onclick="toggleSheets(${idx})">🖼️ 전체 악보 펼쳐보기</button>` : ''}<div id="sheet-area-${idx}" class="all-sheets-area">${set.songs.map(s => { const path = s.sheet || globalSheetMap[s.title]; return path ? `<div class="sheet-item"><p style="font-weight:700; color:var(--primary-color);">${s.title}</p>${s.comment ? `<div class="song-comment" style="margin-bottom:10px;">${s.comment}</div>` : ''}<img src="${path}" class="full-sheet-img" onclick="openSheet('${path}', '${s.title}')"></div>` : ''; }).join('')}</div></div>`;
             }).join('');
         }
 
-        function toggleSheets(idx) { const el = document.getElementById(`sheet-area-${idx}`); const isHide = el.style.display === 'none' || el.style.display === ''; el.style.display = isHide ? 'block' : 'none'; event.target.innerText = isHide ? '❌ 악보 접기' : '🖼️ 전체 악보 펼쳐보기'; }
+        // 악보 크게 보기 (라이트박스 열기)
+        function openSheet(path, title) {
+            document.getElementById('modalImg').src = path;
+            document.getElementById('modalCaption').innerText = title;
+            document.getElementById('sheetModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // 스크롤 방지
+        }
+
+        // 악보 닫기 (돌아가기)
+        function closeSheet() {
+            document.getElementById('sheetModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleSheets(idx) { 
+            const el = document.getElementById(`sheet-area-${idx}`); 
+            el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none'; 
+            event.target.innerText = (el.style.display === 'block') ? '❌ 악보 접기' : '🖼️ 전체 악보 펼쳐보기'; 
+        }
         
-        // 악보 보관함 열기
         function openLibrary() {
             const grid = document.getElementById('libraryGrid');
-            const sortedTitles = Object.keys(globalSheetMap).sort(); // 가나다순 정렬
-            grid.innerHTML = sortedTitles.map(title => `
-                <div class="library-item" onclick="window.open('${globalSheetMap[title]}', '_blank')">
+            grid.innerHTML = Object.keys(globalSheetMap).sort().map(title => `
+                <div class="library-item" onclick="openSheet('${globalSheetMap[title]}', '${title}')">
                     <div style="font-size: 1.5rem;">🎼</div>
                     <p>${title}</p>
                 </div>
@@ -150,11 +192,7 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function closeLibrary() {
-            document.getElementById('libraryModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
+        function closeLibrary() { document.getElementById('libraryModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
         function filterSetlists() { const q = document.getElementById('searchInput').value.toLowerCase(); renderSetlists(setlists.filter(s => s.date.includes(q) || s.songs.some(song => song.title.toLowerCase().includes(q)))); }
         renderSetlists(setlists);
     </script>
