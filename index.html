@@ -13,10 +13,6 @@
             --text-main: #2C3E50;
             --text-muted: #7F8C8D;
             --border-color: #E2E8F0;
-            --btn-hover: #357ABD;
-            --notice-bg: #FFF3CD;
-            --notice-text: #856404;
-            --notice-border: #FFEEBA;
             --comment-bg: #EBF4FF;
             --comment-text: #2B6CB0;
         }
@@ -28,84 +24,57 @@
             --text-main: #D4D4D4;
             --text-muted: #9E9E9E;
             --border-color: #404040;
-            --btn-hover: #4A89DC;
-            --notice-bg: #4D3800;
-            --notice-text: #FFD966;
-            --notice-border: #664D03;
             --comment-bg: #1A365D;
             --comment-text: #90CDF4;
         }
 
-        body { font-family: 'Pretendard', sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; margin: 0; padding: 0; transition: background-color 0.3s, color 0.3s; }
-        header { background-color: var(--card-bg); padding: 2rem 1rem; text-align: center; border-bottom: 1px solid var(--border-color); }
-        header h1 { margin: 0; font-size: 1.8rem; font-weight: 700; }
-        header p { margin: 0.5rem 0 0; color: var(--text-muted); font-size: 1rem; }
-        .container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        body { font-family: 'Pretendard', sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; margin: 0; padding: 0; transition: background-color 0.3s; }
+        header { background-color: var(--card-bg); padding: 1.5rem 1rem; text-align: center; border-bottom: 1px solid var(--border-color); }
+        header h1 { margin: 0; font-size: 1.5rem; font-weight: 700; }
+        .container { max-width: 800px; margin: 1.5rem auto; padding: 0 1rem; }
 
-        .announcement { background-color: var(--notice-bg); color: var(--notice-text); padding: 1rem 1.2rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--notice-border); display: flex; align-items: center; gap: 12px; font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
-        
-        .controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; background: var(--card-bg); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .search-box { flex: 1; min-width: 200px; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-color); color: var(--text-main); font-family: 'Pretendard', sans-serif; }
-        .btn { padding: 0.8rem 1.2rem; border: none; border-radius: 8px; background-color: var(--primary-color); color: white; font-weight: 600; cursor: pointer; transition: background-color 0.2s; white-space: nowrap; }
-        .btn-outline { background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
+        .announcement { background-color: var(--notice-bg, #FFF3CD); color: var(--notice-text, #856404); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(0,0,0,0.05); }
 
-        .card { background-color: var(--card-bg); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-        .date-badge { display: inline-block; background-color: var(--primary-color); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; }
+        .controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; gap: 10px; }
+        .search-box { flex: 1; padding: 0.7rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--card-bg); color: var(--text-main); font-family: inherit; }
+        .btn { padding: 0.6rem 1rem; border: 1px solid var(--primary-color); border-radius: 8px; background: transparent; color: var(--primary-color); font-weight: 600; cursor: pointer; white-space: nowrap; }
+
+        .card { background-color: var(--card-bg); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .date-badge { display: inline-block; background-color: var(--primary-color); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; }
 
         .song-list { list-style: none; padding: 0; margin: 0; }
         .song-list li { padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
         .song-list li:last-child { border-bottom: none; }
         
-        .song-header { display: flex; align-items: center; justify-content: space-between; width: 100%; }
-        .song-info { display: flex; align-items: center; gap: 8px; }
-        .song-title { font-weight: 600; font-size: 1.1rem; }
-        .song-key { background-color: var(--border-color); color: var(--text-main); padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.85rem; font-weight: 700; }
+        .song-header { display: flex; justify-content: space-between; align-items: center; }
+        .song-title { font-weight: 600; font-size: 1.05rem; }
+        .song-key { background-color: var(--border-color); padding: 0.2rem 0.5rem; border-radius: 6px; font-size: 0.8rem; font-weight: 800; margin-left: 5px; }
         
-        .song-comment { 
-            margin-top: 0.5rem; 
-            background-color: var(--comment-bg); 
-            color: var(--comment-text); 
-            padding: 0.4rem 0.8rem; 
-            border-radius: 8px; 
-            font-size: 0.88rem; 
-            font-weight: 500;
-            display: inline-block;
-        }
+        .song-comment { margin-top: 0.5rem; background-color: var(--comment-bg); color: var(--comment-text); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; display: inline-block; }
 
-        .yt-link, .sheet-link { text-decoration: none; font-size: 1.2rem; filter: grayscale(100%); transition: 0.2s; cursor: pointer; }
+        .links { display: flex; gap: 12px; }
+        .yt-link, .sheet-link { text-decoration: none; font-size: 1.2rem; filter: grayscale(100%); transition: 0.2s; }
         .yt-link:hover, .sheet-link:hover { filter: grayscale(0%); transform: scale(1.1); }
 
-        /* 전체 악보 보기 영역 */
         .all-sheets-area { margin-top: 1.5rem; border-top: 2px solid var(--border-color); padding-top: 1.5rem; display: none; }
-        .sheet-viewer-item { margin-bottom: 2.5rem; text-align: center; }
-        .sheet-viewer-title { font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--primary-color); }
-        .full-sheet-img { width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .sheet-item { margin-bottom: 2rem; text-align: center; }
+        .sheet-item p { font-weight: 700; margin-bottom: 0.5rem; color: var(--primary-color); }
+        .full-sheet-img { width: 100%; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 
-        details { margin-top: 1rem; background: var(--bg-color); padding: 0.8rem; border-radius: 8px; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>원종제일교회 찬양 아카이브</h1>
-        <p>주일 예배 찬양 콘티 모음 (2023~2026)</p>
     </header>
 
     <div class="container">
-        <div class="announcement">
-            <span class="announcement-icon">📢</span>
-            <span><strong>공지사항:</strong> 보면대를 꼭 정리해주시기바랍니다.</span>
-        </div>
+        <div class="announcement">📢 보면대를 꼭 정리해주시기바랍니다.</div>
 
         <div class="controls">
-            <input type="text" id="searchInput" class="search-box" placeholder="곡명, 날짜, 키(Key) 검색..." onkeyup="filterSetlists()">
-            <button class="btn btn-outline" onclick="toggleStats()">📊 찬양 통계</button>
-            <button class="btn btn-outline" onclick="toggleTheme()">🌙 다크 모드</button>
-        </div>
-
-        <div id="statsPanel" style="display:none; background: var(--card-bg); padding:1rem; border-radius:12px; border:1px solid var(--border-color); margin-bottom:2rem;">
-            <h3>🏆 최다 선곡 TOP 5</h3>
-            <ul id="statsList" style="display:flex; flex-wrap:wrap; gap:10px; list-style:none; padding:0;"></ul>
+            <input type="text" id="searchInput" class="search-box" placeholder="곡명 또는 날짜 검색..." onkeyup="filterSetlists()">
+            <button class="btn" onclick="document.body.classList.toggle('dark-theme')">🌙 테마 변경</button>
         </div>
 
         <div id="setlist-container"></div>
@@ -133,8 +102,58 @@
                     { title: "내 영혼에 햇빛 비치니", key: "G" },
                     { title: "주만 바라볼찌라", key: "A" }
                 ]
+            },
+            {
+                date: "2026-03-15",
+                songs: [
+                    { title: "내가 매일 기쁘게", key: "G" },
+                    { title: "내 영혼에 햇빛 비치니", key: "G" },
+                    { title: "주만 바라볼찌라", key: "A" }
+                ]
+            },
+            {
+                date: "2026-03-08",
+                songs: [
+                    { title: "슬픈마음 있는 사람", key: "G" },
+                    { title: "살아계신 주", key: "G" },
+                    { title: "깊어진 삶을 주께", key: "F" }
+                ]
+            },
+            {
+                date: "2026-01-25",
+                songs: [
+                    { title: "보혈을 지나", key: "G" },
+                    { title: "당신은 영광의 왕", key: "G" }
+                ]
+            },
+            {
+                date: "2025-10-26",
+                songs: [
+                    { title: "실로암", key: "C" },
+                    { title: "난 예수가 좋다오", key: "A" },
+                    { title: "나의 가장 낮은 마음", key: "A" },
+                    { title: "하늘소망", key: "A" }
+                ]
+            },
+            {
+                date: "2023-12-08",
+                songs: [
+                    { title: "축복송 (때로는 너의 앞에)", key: "D" },
+                    { title: "주 예수 내 맘에", key: "Ab" },
+                    { title: "부르신 곳에서", key: "E" }
+                ]
             }
         ];
+
+        // 전역 악보 맵 생성 (곡 제목 기준 최신 악보 경로 저장)
+        const globalSheetMap = {};
+        setlists.forEach(set => {
+            set.songs.forEach(song => {
+                if (song.sheet && !globalSheetMap[song.title]) {
+                    globalSheetMap[song.title] = song.sheet;
+                }
+            });
+        });
 
         function renderSetlists(data) {
             const container = document.getElementById('setlist-container');
@@ -144,81 +163,60 @@
                 const card = document.createElement('div');
                 card.className = 'card';
                 
-                const songsWithSheet = setlist.songs.filter(s => s.sheet);
+                // 해당 콘티에 악보가 하나라도 존재하는지 확인 (전역 맵 참조)
+                const hasAnySheet = setlist.songs.some(s => s.sheet || globalSheetMap[s.title]);
 
-                let songsHtml = setlist.songs.map((song, index) => {
-                    const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(song.title + ' 찬양')}`;
-                    const sheetIconHtml = song.sheet ? `<a href="${song.sheet}" target="_blank" class="sheet-link" title="악보 보기">🎼</a>` : '';
-                    const commentHtml = song.comment ? `<div class="song-comment">${song.comment}</div>` : '';
-                    
+                const songsHtml = setlist.songs.map((song, i) => {
+                    const sheetPath = song.sheet || globalSheetMap[song.title];
                     return `
                     <li>
                         <div class="song-header">
-                            <div class="song-info">
-                                <span class="song-title">${index + 1}. ${song.title}</span>
+                            <div>
+                                <span class="song-title">${i + 1}. ${song.title}</span>
                                 <span class="song-key">${song.key}</span>
                             </div>
-                            <div style="display:flex; gap:10px;">
-                                <a href="${searchUrl}" target="_blank" class="yt-link">▶️</a>
-                                ${sheetIconHtml}
+                            <div class="links">
+                                <a href="https://www.youtube.com/results?search_query=${song.title} 찬양" target="_blank" class="yt-link">▶️</a>
+                                ${sheetPath ? `<a href="${sheetPath}" target="_blank" class="sheet-link">🎼</a>` : ''}
                             </div>
                         </div>
-                        ${commentHtml}
+                        ${song.comment ? `<div class="song-comment">${song.comment}</div>` : ''}
                     </li>
                 `}).join('');
-
-                // 전체 악보 보기 영역 (코멘트 포함 렌더링)
-                let allSheetsHtml = songsWithSheet.length > 0 ? `
-                    <button class="btn btn-outline" style="width:100%; margin-top:1.5rem;" onclick="toggleAllSheets(${idx})">🖼️ 전체 악보 펼쳐보기</button>
-                    <div id="sheets-area-${idx}" class="all-sheets-area">
-                        ${songsWithSheet.map(s => `
-                            <div class="sheet-viewer-item">
-                                <div class="sheet-viewer-title">${s.title}</div>
-                                ${s.comment ? `<div class="song-comment" style="margin-bottom:10px;">${s.comment}</div>` : ''}
-                                <img src="${s.sheet}" class="full-sheet-img" alt="${s.title}" onerror="this.src='https://via.placeholder.com/400x200?text=No+Image'">
-                            </div>
-                        `).join('')}
-                    </div>
-                ` : '';
 
                 card.innerHTML = `
                     <div class="date-badge">${setlist.date}</div>
                     <ul class="song-list">${songsHtml}</ul>
-                    ${allSheetsHtml}
+                    ${hasAnySheet ? `<button class="btn" style="width:100%; margin-top:1.2rem; border-color:var(--border-color); color:var(--text-muted);" onclick="toggleSheets(${idx})">🖼️ 전체 악보 펼쳐보기</button>` : ''}
+                    <div id="sheet-area-${idx}" class="all-sheets-area">
+                        ${setlist.songs.map(s => {
+                            const sheetPath = s.sheet || globalSheetMap[s.title];
+                            return sheetPath ? `
+                                <div class="sheet-item">
+                                    <p>${s.title}</p>
+                                    ${s.comment ? `<div class="song-comment" style="margin-bottom:10px;">${s.comment}</div>` : ''}
+                                    <img src="${sheetPath}" class="full-sheet-img" onerror="this.parentElement.style.display='none'">
+                                </div>
+                            ` : '';
+                        }).join('')}
+                    </div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        function toggleAllSheets(idx) {
-            const area = document.getElementById(`sheets-area-${idx}`);
-            const isVisible = area.style.display === 'block';
-            area.style.display = isVisible ? 'none' : 'block';
-            event.target.innerText = isVisible ? '🖼️ 전체 악보 펼쳐보기' : '❌ 악보 접기';
-        }
-
-        function toggleStats() {
-            const panel = document.getElementById('statsPanel');
-            if (panel.style.display === 'block') { panel.style.display = 'none'; return; }
-            const songCounts = {};
-            setlists.forEach(s => s.songs.forEach(song => {
-                let cleanTitle = song.title.split(' (')[0];
-                songCounts[cleanTitle] = (songCounts[cleanTitle] || 0) + 1;
-            }));
-            const sorted = Object.entries(songCounts).sort((a,b) => b[1]-a[1]).slice(0,5);
-            document.getElementById('statsList').innerHTML = sorted.map((s,i) => `<li style="background:var(--bg-color); padding:0.5rem 1rem; border-radius:20px; font-size:0.9rem; border:1px solid var(--border-color);">${i+1}. ${s[0]} <b>${s[1]}회</b></li>`).join('');
-            panel.style.display = 'block';
+        function toggleSheets(idx) {
+            const el = document.getElementById(`sheet-area-${idx}`);
+            const isHide = el.style.display === 'none' || el.style.display === '';
+            el.style.display = isHide ? 'block' : 'none';
+            event.target.innerText = isHide ? '❌ 악보 접기' : '🖼️ 전체 악보 펼쳐보기';
         }
 
         function filterSetlists() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = setlists.filter(setlist => 
-                setlist.date.includes(query) || setlist.songs.some(s => s.title.toLowerCase().includes(query))
-            );
-            renderSetlists(filtered);
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            renderSetlists(setlists.filter(s => s.date.includes(q) || s.songs.some(song => song.title.toLowerCase().includes(q))));
         }
 
-        function toggleTheme() { document.body.classList.toggle('dark-theme'); }
         renderSetlists(setlists);
     </script>
 </body>
