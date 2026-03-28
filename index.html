@@ -13,10 +13,9 @@
             --text-main: #2C3E50;
             --text-muted: #7F8C8D;
             --border-color: #E2E8F0;
-            --btn-hover: #357ABD;
+            --chord-color: #E67E22;
             --notice-bg: #FFF3CD;
             --notice-text: #856404;
-            --notice-border: #FFEEBA;
             --comment-bg: #EBF4FF;
             --comment-text: #2B6CB0;
         }
@@ -28,87 +27,76 @@
             --text-main: #D4D4D4;
             --text-muted: #9E9E9E;
             --border-color: #404040;
-            --btn-hover: #4A89DC;
+            --chord-color: #F39C12;
             --notice-bg: #4D3800;
             --notice-text: #FFD966;
-            --notice-border: #664D03;
             --comment-bg: #1A365D;
             --comment-text: #90CDF4;
         }
 
-        body { font-family: 'Pretendard', sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; margin: 0; padding: 0; transition: background-color 0.3s, color 0.3s; }
+        body { font-family: 'Pretendard', sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; margin: 0; padding: 0; transition: background-color 0.3s; }
         header { background-color: var(--card-bg); padding: 2rem 1rem; text-align: center; border-bottom: 1px solid var(--border-color); }
-        header h1 { margin: 0; font-size: 1.8rem; font-weight: 700; }
-        header p { margin: 0.5rem 0 0; color: var(--text-muted); font-size: 1rem; }
         .container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
 
-        .announcement { background-color: var(--notice-bg); color: var(--notice-text); padding: 1rem 1.2rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--notice-border); display: flex; align-items: center; gap: 12px; font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
+        .announcement { background-color: var(--notice-bg); color: var(--notice-text); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid rgba(0,0,0,0.05); font-weight: 600; display: flex; align-items: center; gap: 10px; }
         
-        .controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; background: var(--card-bg); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .search-box { flex: 1; min-width: 200px; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-color); color: var(--text-main); font-family: 'Pretendard', sans-serif; }
-        .btn { padding: 0.8rem 1.2rem; border: none; border-radius: 8px; background-color: var(--primary-color); color: white; font-weight: 600; cursor: pointer; transition: background-color 0.2s; white-space: nowrap; }
-        .btn-outline { background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
+        .controls { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; background: var(--card-bg); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); }
+        .search-box { flex: 1; min-width: 200px; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-color); color: var(--text-main); font-family: inherit; }
 
-        .card { background-color: var(--card-bg); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .card { background-color: var(--card-bg); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .date-badge { display: inline-block; background-color: var(--primary-color); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; }
 
         .song-list { list-style: none; padding: 0; margin: 0; }
         .song-list li { padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
         .song-list li:last-child { border-bottom: none; }
         
-        .song-header { display: flex; align-items: center; justify-content: space-between; width: 100%; }
-        .song-info { display: flex; align-items: center; gap: 8px; }
-        .song-title { font-weight: 600; font-size: 1.1rem; }
-        .song-key { background-color: var(--border-color); color: var(--text-main); padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.85rem; font-weight: 700; }
+        .song-header { display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 10px; }
+        .song-title { font-weight: 600; font-size: 1.1rem; margin-right: 8px; }
+        .song-key { background-color: var(--border-color); padding: 0.2rem 0.5rem; border-radius: 6px; font-size: 0.85rem; font-weight: 800; }
+        .song-comment { margin-top: 0.5rem; background-color: var(--comment-bg); color: var(--comment-text); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.88rem; display: inline-block; }
+
+        .btn-group { display: flex; gap: 8px; }
+        .btn { padding: 0.5rem 0.8rem; border: none; border-radius: 8px; color: white; font-weight: 600; cursor: pointer; font-size: 0.85rem; font-family: inherit; transition: 0.2s; }
+        .btn-singer { background-color: var(--primary-color); }
+        .btn-band { background-color: var(--chord-color); }
+        .btn-outline { background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
+
+        /* 모달 스타일 (가사/코드 공용) */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-color); z-index: 2000; overflow-y: auto; padding: 1.5rem; }
+        .modal-header { position: sticky; top: 0; background: var(--bg-color); padding: 10px 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-content { max-width: 700px; margin: 0 auto; white-space: pre-wrap; }
         
-        .song-comment { 
-            margin-top: 0.5rem; 
-            background-color: var(--comment-bg); 
-            color: var(--comment-text); 
-            padding: 0.4rem 0.8rem; 
-            border-radius: 8px; 
-            font-size: 0.88rem; 
-            font-weight: 500;
-            display: inline-block;
-        }
-
-        .yt-link, .sheet-link { text-decoration: none; font-size: 1.2rem; filter: grayscale(100%); transition: 0.2s; cursor: pointer; }
-        .yt-link:hover, .sheet-link:hover { filter: grayscale(0%); transform: scale(1.1); }
-
-        /* 전체 악보 보기 영역 */
-        .all-sheets-area { margin-top: 1.5rem; border-top: 2px solid var(--border-color); padding-top: 1.5rem; display: none; }
-        .sheet-viewer-item { margin-bottom: 2.5rem; text-align: center; }
-        .sheet-viewer-title { font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--primary-color); }
-        .full-sheet-img { width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-
-        details { margin-top: 1rem; background: var(--bg-color); padding: 0.8rem; border-radius: 8px; font-size: 0.9rem; }
+        /* 악기팀 전용 텍스트 스타일 */
+        .chord-text { font-family: 'Courier New', Courier, monospace; line-height: 2.2; font-size: 1.2rem; }
+        .chord-line { color: var(--chord-color); font-weight: 800; font-size: 1.4rem; margin-bottom: -1rem; }
+        .lyrics-line { margin-bottom: 1rem; }
+        .section-label { color: #27AE60; font-weight: bold; border-left: 4px solid #27AE60; padding-left: 10px; margin: 20px 0 10px 0; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>원종제일교회 찬양 아카이브</h1>
-        <p>주일 예배 찬양 콘티 모음 (2023~2026)</p>
+        <p>주일 예배 찬양 콘티 통합 모드</p>
     </header>
 
     <div class="container">
-        <div class="announcement">
-            <span class="announcement-icon">📢</span>
-            <span><strong>공지사항:</strong> 보면대를 꼭 정리해주시기바랍니다.</span>
-        </div>
+        <div class="announcement">📢 <span>보면대를 꼭 정리해주시기바랍니다.</span></div>
 
         <div class="controls">
-            <input type="text" id="searchInput" class="search-box" placeholder="곡명, 날짜, 키(Key) 검색..." onkeyup="filterSetlists()">
-            <button class="btn btn-outline" onclick="toggleStats()">📊 찬양 통계</button>
-            <button class="btn btn-outline" onclick="toggleTheme()">🌙 다크 모드</button>
-        </div>
-
-        <div id="statsPanel" style="display:none; background: var(--card-bg); padding:1rem; border-radius:12px; border:1px solid var(--border-color); margin-bottom:2rem;">
-            <h3>🏆 최다 선곡 TOP 5</h3>
-            <ul id="statsList" style="display:flex; flex-wrap:wrap; gap:10px; list-style:none; padding:0;"></ul>
+            <input type="text" id="searchInput" class="search-box" placeholder="곡명, 날짜 검색..." onkeyup="filterSetlists()">
+            <button class="btn btn-outline" onclick="document.body.classList.toggle('dark-theme')">🌙 다크 모드</button>
         </div>
 
         <div id="setlist-container"></div>
+    </div>
+
+    <div id="viewModal" class="modal">
+        <div class="modal-header">
+            <div id="modalTitle" style="font-size: 1.5rem; font-weight: 800;"></div>
+            <button class="btn btn-singer" onclick="closeModal()">❌ 닫기</button>
+        </div>
+        <div id="modalBody" class="modal-content"></div>
     </div>
 
     <script>
@@ -116,109 +104,89 @@
             {
                 date: "2026-03-29",
                 songs: [
-                    { title: "축복송", key: "G", sheet: "scores/축복송.jpg" },
-                    { title: "나의 가장 낮은 마음", key: "A", sheet: "scores/나의가장낮은마음.jpg" },
-                    { title: "난 예수가 좋다오", key: "A", comment: "📢 후렴으로 시작합니다.", sheet: "scores/난예수가좋다오.jpg" },
-                    { title: "내 안에 부어주소서", key: "A", comment: "🕺 주일학교 율동과 함께", sheet: "scores/내안에부어주소서.jpg" },
-                    { title: "천국은 마치", key: "A", comment: "🕺 주일학교 율동과 함께", sheet: "scores/천국은마치.jpg" },
-                    { title: "주만 바라볼찌라", key: "A", sheet: "scores/주만바라볼찌라.jpg" },
-                    { title: "이 땅의 황무함을 보소서", key: "A", comment: "📢 후렴으로 시작합니다.", sheet: "scores/이땅의황무함을보소서.jpg" },
-                    { title: "그 사랑 (기도회 찬양)", key: "G", sheet: "scores/그사랑.jpg" }
-                ]
-            },
-            {
-                date: "2026-03-22",
-                songs: [
-                    { title: "내가 매일 기쁘게", key: "G" },
-                    { title: "내 영혼에 햇빛 비치니", key: "G" },
-                    { title: "주만 바라볼찌라", key: "A" }
+                    { title: "축복송", key: "G", 
+                      lyrics: "[Verse]\n때로는 너의 앞에 어려움 있겠지만\n주님의 임재 속에 너의 마음 녹아지리\n\n[Chorus]\n하나님의 사랑이 너의 삶 속에\n가득하기를 축복해",
+                      chords: [
+                          { type: "label", text: "INTRO" }, { type: "chords", text: "G  -  D/F#  -  Em  -  Bm7" },
+                          { type: "label", text: "VERSE" }, { type: "chords", text: "G        D/F#      Em       Bm7" }, { type: "lyrics", text: "때로는 너의 앞에 어려움 있겠지만" }
+                      ]
+                    },
+                    { title: "나의 가장 낮은 마음", key: "A",
+                      lyrics: "나의 가장 낮은 마음 주님께서 기뻐하시고\n작은 일에 큰 기쁨을 느끼게 하시는 주님\n\n[Chorus]\n주님 내가 여기 있사오니 나를 써 주소서",
+                      chords: [
+                          { type: "label", text: "CHORUS" }, { type: "chords", text: "A         E/G#      F#m       D" }, { type: "lyrics", text: "주님 내가 여기 있사오니 나를 써 주소서" }
+                      ]
+                    },
+                    { title: "난 예수가 좋다오", key: "A", comment: "📢 후렴으로 시작합니다.",
+                      lyrics: "[Chorus]\n난 예수가 좋다오 난 예수가 좋다오\n많은 사람들 나를 버려도 난 예수가 좋다오"
+                    },
+                    { title: "내 안에 부어주소서", key: "A", comment: "🕺 주일학교 율동과 함께" },
+                    { title: "천국은 마치", key: "A", comment: "🕺 주일학교 율동과 함께" },
+                    { title: "주만 바라볼찌라", key: "A" },
+                    { title: "이 땅의 황무함을 보소서", key: "A", comment: "📢 후렴으로 시작합니다." },
+                    { title: "그 사랑 (기도회 찬양)", key: "G" }
                 ]
             }
         ];
 
         function renderSetlists(data) {
             const container = document.getElementById('setlist-container');
-            container.innerHTML = '';
-            
-            data.forEach((setlist, idx) => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                
-                const songsWithSheet = setlist.songs.filter(s => s.sheet);
-
-                let songsHtml = setlist.songs.map((song, index) => {
-                    const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(song.title + ' 찬양')}`;
-                    const sheetIconHtml = song.sheet ? `<a href="${song.sheet}" target="_blank" class="sheet-link" title="악보 보기">🎼</a>` : '';
-                    const commentHtml = song.comment ? `<div class="song-comment">${song.comment}</div>` : '';
-                    
-                    return `
-                    <li>
-                        <div class="song-header">
-                            <div class="song-info">
-                                <span class="song-title">${index + 1}. ${song.title}</span>
-                                <span class="song-key">${song.key}</span>
-                            </div>
-                            <div style="display:flex; gap:10px;">
-                                <a href="${searchUrl}" target="_blank" class="yt-link">▶️</a>
-                                ${sheetIconHtml}
-                            </div>
-                        </div>
-                        ${commentHtml}
-                    </li>
-                `}).join('');
-
-                // 전체 악보 보기 영역 (코멘트 포함 렌더링)
-                let allSheetsHtml = songsWithSheet.length > 0 ? `
-                    <button class="btn btn-outline" style="width:100%; margin-top:1.5rem;" onclick="toggleAllSheets(${idx})">🖼️ 전체 악보 펼쳐보기</button>
-                    <div id="sheets-area-${idx}" class="all-sheets-area">
-                        ${songsWithSheet.map(s => `
-                            <div class="sheet-viewer-item">
-                                <div class="sheet-viewer-title">${s.title}</div>
-                                ${s.comment ? `<div class="song-comment" style="margin-bottom:10px;">${s.comment}</div>` : ''}
-                                <img src="${s.sheet}" class="full-sheet-img" alt="${s.title}" onerror="this.src='https://via.placeholder.com/400x200?text=No+Image'">
-                            </div>
-                        `).join('')}
-                    </div>
-                ` : '';
-
-                card.innerHTML = `
+            container.innerHTML = data.map((setlist) => `
+                <div class="card">
                     <div class="date-badge">${setlist.date}</div>
-                    <ul class="song-list">${songsHtml}</ul>
-                    ${allSheetsHtml}
-                `;
-                container.appendChild(card);
-            });
+                    <ul class="song-list">
+                        ${setlist.songs.map((song) => `
+                            <li>
+                                <div class="song-header">
+                                    <div class="song-info">
+                                        <span class="song-title">${song.title}</span>
+                                        <span class="song-key">${song.key}</span>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button class="btn btn-singer" onclick="openSingerMode('${song.title}', \`${song.lyrics || '가사 준비중'}\`)">🎤 싱어</button>
+                                        <button class="btn btn-band" onclick="openBandMode('${song.title}', ${JSON.stringify(song.chords || []).replace(/"/g, '&quot;')})">🎸 악기</button>
+                                    </div>
+                                </div>
+                                ${song.comment ? `<div class="song-comment">${song.comment}</div>` : ''}
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `).join('');
         }
 
-        function toggleAllSheets(idx) {
-            const area = document.getElementById(`sheets-area-${idx}`);
-            const isVisible = area.style.display === 'block';
-            area.style.display = isVisible ? 'none' : 'block';
-            event.target.innerText = isVisible ? '🖼️ 전체 악보 펼쳐보기' : '❌ 악보 접기';
+        function openSingerMode(title, lyrics) {
+            document.getElementById('modalTitle').innerText = `🎤 가사: ${title}`;
+            const body = document.getElementById('modalBody');
+            body.className = "modal-content";
+            body.innerHTML = lyrics.replace(/\[Chorus\]/g, '<div style="color:var(--primary-color); font-weight:bold; background:var(--comment-bg); padding:10px; border-radius:8px; margin:10px 0;">후렴</div>')
+                                   .replace(/\[Verse\]/g, '<div style="font-weight:bold; margin-top:15px; color:var(--text-muted);">절</div>');
+            document.getElementById('viewModal').style.display = 'block';
         }
 
-        function toggleStats() {
-            const panel = document.getElementById('statsPanel');
-            if (panel.style.display === 'block') { panel.style.display = 'none'; return; }
-            const songCounts = {};
-            setlists.forEach(s => s.songs.forEach(song => {
-                let cleanTitle = song.title.split(' (')[0];
-                songCounts[cleanTitle] = (songCounts[cleanTitle] || 0) + 1;
-            }));
-            const sorted = Object.entries(songCounts).sort((a,b) => b[1]-a[1]).slice(0,5);
-            document.getElementById('statsList').innerHTML = sorted.map((s,i) => `<li style="background:var(--bg-color); padding:0.5rem 1rem; border-radius:20px; font-size:0.9rem; border:1px solid var(--border-color);">${i+1}. ${s[0]} <b>${s[1]}회</b></li>`).join('');
-            panel.style.display = 'block';
+        function openBandMode(title, chords) {
+            document.getElementById('modalTitle').innerText = `🎸 코드: ${title}`;
+            const body = document.getElementById('modalBody');
+            body.className = "modal-content chord-text";
+            if (chords.length === 0) { body.innerHTML = "코드 정보가 등록되지 않았습니다."; }
+            else {
+                body.innerHTML = chords.map(item => {
+                    if (item.type === "label") return `<div class="section-label">${item.text}</div>`;
+                    if (item.type === "chords") return `<div class="chord-line">${item.text}</div>`;
+                    if (item.type === "lyrics") return `<div class="lyrics-line">${item.text}</div>`;
+                    return "";
+                }).join('');
+            }
+            document.getElementById('viewModal').style.display = 'block';
         }
 
+        function closeModal() { document.getElementById('viewModal').style.display = 'none'; }
         function filterSetlists() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = setlists.filter(setlist => 
-                setlist.date.includes(query) || setlist.songs.some(s => s.title.toLowerCase().includes(query))
-            );
+            const filtered = setlists.filter(s => s.date.includes(query) || s.songs.some(song => song.title.toLowerCase().includes(query)));
             renderSetlists(filtered);
         }
 
-        function toggleTheme() { document.body.classList.toggle('dark-theme'); }
         renderSetlists(setlists);
     </script>
 </body>
