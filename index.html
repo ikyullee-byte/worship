@@ -13,6 +13,8 @@
             --text-main: #2C3E50;
             --text-muted: #7F8C8D;
             --border-color: #E2E8F0;
+            --notice-bg: #FFF3CD;
+            --notice-text: #856404;
             --comment-bg: #EBF4FF;
             --comment-text: #2B6CB0;
         }
@@ -24,6 +26,8 @@
             --text-main: #D4D4D4;
             --text-muted: #9E9E9E;
             --border-color: #404040;
+            --notice-bg: #4D3800;
+            --notice-text: #FFD966;
             --comment-bg: #1A365D;
             --comment-text: #90CDF4;
         }
@@ -32,51 +36,35 @@
         header { background-color: var(--card-bg); padding: 1.5rem 1rem; text-align: center; border-bottom: 1px solid var(--border-color); }
         header h1 { margin: 0; font-size: 1.5rem; font-weight: 700; }
         .container { max-width: 800px; margin: 1.5rem auto; padding: 0 1rem; }
-
-        .announcement { background-color: var(--notice-bg, #FFF3CD); color: var(--notice-text, #856404); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(0,0,0,0.05); }
-
+        .announcement { background-color: var(--notice-bg); color: var(--notice-text); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(0,0,0,0.05); }
         .controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; gap: 10px; }
         .search-box { flex: 1; padding: 0.7rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--card-bg); color: var(--text-main); font-family: inherit; }
         .btn { padding: 0.6rem 1rem; border: 1px solid var(--primary-color); border-radius: 8px; background: transparent; color: var(--primary-color); font-weight: 600; cursor: pointer; white-space: nowrap; }
-
         .card { background-color: var(--card-bg); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .date-badge { display: inline-block; background-color: var(--primary-color); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; }
-
         .song-list { list-style: none; padding: 0; margin: 0; }
         .song-list li { padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
         .song-list li:last-child { border-bottom: none; }
-        
         .song-header { display: flex; justify-content: space-between; align-items: center; }
         .song-title { font-weight: 600; font-size: 1.05rem; }
         .song-key { background-color: var(--border-color); padding: 0.2rem 0.5rem; border-radius: 6px; font-size: 0.8rem; font-weight: 800; margin-left: 5px; }
-        
         .song-comment { margin-top: 0.5rem; background-color: var(--comment-bg); color: var(--comment-text); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; display: inline-block; }
-
         .links { display: flex; gap: 12px; }
         .yt-link, .sheet-link { text-decoration: none; font-size: 1.2rem; filter: grayscale(100%); transition: 0.2s; }
         .yt-link:hover, .sheet-link:hover { filter: grayscale(0%); transform: scale(1.1); }
-
         .all-sheets-area { margin-top: 1.5rem; border-top: 2px solid var(--border-color); padding-top: 1.5rem; display: none; }
         .sheet-item { margin-bottom: 2rem; text-align: center; }
-        .sheet-item p { font-weight: 700; margin-bottom: 0.5rem; color: var(--primary-color); }
-        .full-sheet-img { width: 100%; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-
+        .full-sheet-img { width: 100%; border-radius: 8px; border: 1px solid var(--border-color); }
     </style>
 </head>
 <body>
-
-    <header>
-        <h1>원종제일교회 찬양 아카이브</h1>
-    </header>
-
+    <header><h1>원종제일교회 찬양 아카이브</h1></header>
     <div class="container">
         <div class="announcement">📢 보면대를 꼭 정리해주시기바랍니다.</div>
-
         <div class="controls">
             <input type="text" id="searchInput" class="search-box" placeholder="곡명 또는 날짜 검색..." onkeyup="filterSetlists()">
             <button class="btn" onclick="document.body.classList.toggle('dark-theme')">🌙 테마 변경</button>
         </div>
-
         <div id="setlist-container"></div>
     </div>
 
@@ -95,128 +83,55 @@
                     { title: "그 사랑 (기도회 찬양)", key: "G", sheet: "scores/그사랑.jpg" }
                 ]
             },
-            {
-                date: "2026-03-22",
-                songs: [
-                    { title: "내가 매일 기쁘게", key: "G" },
-                    { title: "내 영혼에 햇빛 비치니", key: "G" },
-                    { title: "주만 바라볼찌라", key: "A" }
-                ]
-            },
-            {
-                date: "2026-03-15",
-                songs: [
-                    { title: "내가 매일 기쁘게", key: "G" },
-                    { title: "내 영혼에 햇빛 비치니", key: "G" },
-                    { title: "주만 바라볼찌라", key: "A" }
-                ]
-            },
-            {
-                date: "2026-03-08",
-                songs: [
-                    { title: "슬픈마음 있는 사람", key: "G" },
-                    { title: "살아계신 주", key: "G" },
-                    { title: "깊어진 삶을 주께", key: "F" }
-                ]
-            },
-            {
-                date: "2026-01-25",
-                songs: [
-                    { title: "보혈을 지나", key: "G" },
-                    { title: "당신은 영광의 왕", key: "G" }
-                ]
-            },
-            {
-                date: "2025-10-26",
-                songs: [
-                    { title: "실로암", key: "C" },
-                    { title: "난 예수가 좋다오", key: "A" },
-                    { title: "나의 가장 낮은 마음", key: "A" },
-                    { title: "하늘소망", key: "A" }
-                ]
-            },
-            {
-                date: "2023-12-08",
-                songs: [
-                    { title: "축복송 (때로는 너의 앞에)", key: "D" },
-                    { title: "주 예수 내 맘에", key: "Ab" },
-                    { title: "부르신 곳에서", key: "E" }
-                ]
-            }
+            { date: "2026-03-22", songs: [{ title: "내가 매일 기쁘게", key: "G" }, { title: "내 영혼에 햇빛 비치니", key: "G" }, { title: "주만 바라볼찌라", key: "A" }] },
+            { date: "2026-03-15", songs: [{ title: "내가 매일 기쁘게", key: "G" }, { title: "내 영혼에 햇빛 비치니", key: "G" }, { title: "주만 바라볼찌라", key: "A" }] },
+            { date: "2026-03-08", songs: [{ title: "슬픈마음 있는 사람", key: "G" }, { title: "살아계신 주 (후렴)", key: "G" }, { title: "깊어진 삶을 주께", key: "F" }] },
+            { date: "2026-02-08", songs: [{ title: "크신 주께 영광돌리세", key: "E" }, { title: "위대하고 강하신 주님", key: "E" }, { title: "주를 향한 나의 사랑을", key: "E" }] },
+            { date: "2026-01-25", songs: [{ title: "보혈을 지나", key: "G" }, { title: "당신은 영광의 왕", key: "G" }] },
+            { date: "2026-01-11", songs: [{ title: "기뻐하며 왕께 노래 부르리", key: "F" }, { title: "오 주여 나의 마음이", key: "F" }, { title: "비 준비하시니", key: "E" }] },
+            { date: "2026-01-04", songs: [{ title: "은혜", key: "C" }, { title: "오 신실하신 주", key: "D" }, { title: "주가 일하시네", key: "C" }] },
+            { date: "2025-12-28", songs: [{ title: "주의 음성을 내가 들으니", key: "G" }, { title: "빛의 사자들이여", key: "G" }, { title: "그 사랑", key: "G" }] },
+            { date: "2025-12-14", songs: [{ title: "내 안에 부어주소서", key: "A" }, { title: "나의 가장 낮은 마음", key: "A" }, { title: "꽃들도", key: "E" }] },
+            { date: "2025-12-07", songs: [{ title: "오 신실 하신 주", key: "D" }, { title: "기뻐하며 왕께", key: "F" }, { title: "예배합니다", key: "E" }] },
+            { date: "2025-11-23", songs: [{ title: "지금까지 지내온 것", key: "E" }, { title: "감사로 제사 드리는 자가", key: "E" }, { title: "비 준비하시니", key: "E" }] },
+            { date: "2025-11-16", songs: [{ title: "지금까지 지내온 것", key: "E" }, { title: "감사로 제사 드리는 자가", key: "E" }, { title: "비 준비하시니", key: "E" }] },
+            { date: "2025-11-02", songs: [{ title: "사랑하는 나의 아버지", key: "C" }, { title: "실로암", key: "C" }, { title: "은혜", key: "C" }] },
+            { date: "2025-10-26", songs: [{ title: "실로암", key: "C" }, { title: "난 예수가 좋다오", key: "A" }, { title: "나의 가장 낮은 마음", key: "A" }, { title: "하늘소망", key: "A" }] },
+            { date: "2025-10-12", songs: [{ title: "주께 가까이", key: "A" }, { title: "난 예수가 좋다오", key: "A" }, { title: "예배합니다", key: "E" }] },
+            { date: "2025-09-14", songs: [{ title: "예수 사랑해요", key: "C" }, { title: "예수 십자가의 흘린 피로써 - 내가 매일 기쁘게", key: "G" }, { title: "주는 완전합니다", key: "E" }] },
+            { date: "2025-09-07", songs: [{ title: "주가 보이신 생명의 길", key: "A" }, { title: "예수님 찬양 - 사람을 보며", key: "A" }, { title: "나는 예배자입니다", key: "F" }] },
+            { date: "2025-08-17", songs: [{ title: "예배합니다", key: "E" }, { title: "오 주여 나의 마음이", key: "G" }, { title: "주는 완전합니다", key: "E" }] },
+            { date: "2025-08-10", songs: [{ title: "나는 예배자입니다", key: "F" }, { title: "난 예수가 좋다오", key: "A" }, { title: "예수 닮기를", key: "A" }] },
+            { date: "2025-07-27", songs: [{ title: "야곱의 축복", key: "C" }, { title: "예수님이 말씀하시니 – 천국은 마치", key: "A" }, { title: "내 안에 부어주소서", key: "A" }, { title: "그 사랑", key: "G" }] },
+            { date: "2025-07-20", songs: [{ title: "주가 보이신 생명의 길", key: "A" }, { title: "예수님 찬양 / 사람을 보며 / 오 이 기쁨 / 천국은 마치", key: "A" }, { title: "나는 예배자입니다", key: "F" }] },
+            { date: "2025-07-13", songs: [{ title: "예수 사랑해요 나 주앞에 엎드려", key: "C" }, { title: "예수 십자가의 흘린 피로써 - 내가 매일 기쁘게", key: "G" }, { title: "주는 완전합니다", key: "E" }] },
+            { date: "2025-07-06", songs: [{ title: "목마른 사슴 시냇물을 찾아", key: "C" }, { title: "구주의 십자가 보혈로 / 구주 예수 의지함이", key: "G" }, { title: "은혜", key: "C" }] },
+            { date: "2025-07-01", songs: [{ title: "예수 닮기를", key: "A" }, { title: "실로암", key: "C" }, { title: "세상 모든 민족이", key: "G" }] },
+            { date: "2025-06-22", songs: [{ title: "내 모습 이대로", key: "D" }, { title: "기뻐하며 왕께", key: "F" }, { title: "주께 가까이 날 이끄소서", key: "A" }] },
+            { date: "2025-06-15", songs: [{ title: "사랑합니다 나의 예수님", key: "G" }, { title: "오 주여 나의 마음이", key: "G" }, { title: "예배합니다", key: "E" }] },
+            { date: "2025-06-08", songs: [{ title: "내 영혼은 안전합니다", key: "E" }, { title: "나의 가장 낮은 마음", key: "A" }, { title: "주 안에 우린 하나 (기대)", key: "A" }] },
+            { date: "2025-05-25", songs: [{ title: "사랑하는 나의 아버지", key: "C" }, { title: "난 예수가 좋다오", key: "A" }, { title: "이 땅의 황무함을 보소서", key: "A" }] },
+            { date: "2025-05-18", songs: [{ title: "보혈을 지나", key: "G" }, { title: "난 예수가 좋다오", key: "A" }, { title: "그 사랑", key: "G" }] },
+            { date: "2023-12-08", songs: [{ title: "축복송 (때로는 너의 앞에)", key: "D" }, { title: "주 예수 내 맘에", key: "Ab" }, { title: "부르신 곳에서", key: "E" }] }
         ];
 
-        // 전역 악보 맵 생성 (곡 제목 기준 최신 악보 경로 저장)
         const globalSheetMap = {};
-        setlists.forEach(set => {
-            set.songs.forEach(song => {
-                if (song.sheet && !globalSheetMap[song.title]) {
-                    globalSheetMap[song.title] = song.sheet;
-                }
-            });
-        });
+        setlists.forEach(set => set.songs.forEach(s => { if (s.sheet && !globalSheetMap[s.title]) globalSheetMap[s.title] = s.sheet; }));
 
         function renderSetlists(data) {
             const container = document.getElementById('setlist-container');
-            container.innerHTML = '';
-            
-            data.forEach((setlist, idx) => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                
-                // 해당 콘티에 악보가 하나라도 존재하는지 확인 (전역 맵 참조)
-                const hasAnySheet = setlist.songs.some(s => s.sheet || globalSheetMap[s.title]);
-
-                const songsHtml = setlist.songs.map((song, i) => {
-                    const sheetPath = song.sheet || globalSheetMap[song.title];
-                    return `
-                    <li>
-                        <div class="song-header">
-                            <div>
-                                <span class="song-title">${i + 1}. ${song.title}</span>
-                                <span class="song-key">${song.key}</span>
-                            </div>
-                            <div class="links">
-                                <a href="https://www.youtube.com/results?search_query=${song.title} 찬양" target="_blank" class="yt-link">▶️</a>
-                                ${sheetPath ? `<a href="${sheetPath}" target="_blank" class="sheet-link">🎼</a>` : ''}
-                            </div>
-                        </div>
-                        ${song.comment ? `<div class="song-comment">${song.comment}</div>` : ''}
-                    </li>
-                `}).join('');
-
-                card.innerHTML = `
-                    <div class="date-badge">${setlist.date}</div>
-                    <ul class="song-list">${songsHtml}</ul>
-                    ${hasAnySheet ? `<button class="btn" style="width:100%; margin-top:1.2rem; border-color:var(--border-color); color:var(--text-muted);" onclick="toggleSheets(${idx})">🖼️ 전체 악보 펼쳐보기</button>` : ''}
-                    <div id="sheet-area-${idx}" class="all-sheets-area">
-                        ${setlist.songs.map(s => {
-                            const sheetPath = s.sheet || globalSheetMap[s.title];
-                            return sheetPath ? `
-                                <div class="sheet-item">
-                                    <p>${s.title}</p>
-                                    ${s.comment ? `<div class="song-comment" style="margin-bottom:10px;">${s.comment}</div>` : ''}
-                                    <img src="${sheetPath}" class="full-sheet-img" onerror="this.parentElement.style.display='none'">
-                                </div>
-                            ` : '';
-                        }).join('')}
-                    </div>
-                `;
-                container.appendChild(card);
-            });
+            container.innerHTML = data.map((set, idx) => {
+                const hasAnySheet = set.songs.some(s => s.sheet || globalSheetMap[s.title]);
+                const songsHtml = set.songs.map((s, i) => {
+                    const sheetPath = s.sheet || globalSheetMap[s.title];
+                    return `<li><div class="song-header"><div><span class="song-title">${i+1}. ${s.title}</span><span class="song-key">${s.key}</span></div><div class="links"><a href="https://www.youtube.com/results?search_query=${s.title} 찬양" target="_blank" class="yt-link">▶️</a>${sheetPath ? `<a href="${sheetPath}" target="_blank" class="sheet-link">🎼</a>` : ''}</div></div>${s.comment ? `<div class="song-comment">${s.comment}</div>` : ''}</li>`;
+                }).join('');
+                return `<div class="card"><div class="date-badge">${set.date}</div><ul class="song-list">${songsHtml}</ul>${hasAnySheet ? `<button class="btn" style="width:100%; margin-top:1.2rem; border-color:var(--border-color); color:var(--text-muted);" onclick="toggleSheets(${idx})">🖼️ 전체 악보 펼쳐보기</button>` : ''}<div id="sheet-area-${idx}" class="all-sheets-area">${set.songs.map(s => { const path = s.sheet || globalSheetMap[s.title]; return path ? `<div class="sheet-item"><p>${s.title}</p>${s.comment ? `<div class="song-comment" style="margin-bottom:10px;">${s.comment}</div>` : ''}<img src="${path}" class="full-sheet-img"></div>` : ''; }).join('')}</div></div>`;
+            }).join('');
         }
 
-        function toggleSheets(idx) {
-            const el = document.getElementById(`sheet-area-${idx}`);
-            const isHide = el.style.display === 'none' || el.style.display === '';
-            el.style.display = isHide ? 'block' : 'none';
-            event.target.innerText = isHide ? '❌ 악보 접기' : '🖼️ 전체 악보 펼쳐보기';
-        }
-
-        function filterSetlists() {
-            const q = document.getElementById('searchInput').value.toLowerCase();
-            renderSetlists(setlists.filter(s => s.date.includes(q) || s.songs.some(song => song.title.toLowerCase().includes(q))));
-        }
-
+        function toggleSheets(idx) { const el = document.getElementById(`sheet-area-${idx}`); const isHide = el.style.display === 'none' || el.style.display === ''; el.style.display = isHide ? 'block' : 'none'; event.target.innerText = isHide ? '❌ 악보 접기' : '🖼️ 전체 악보 펼쳐보기'; }
+        function filterSetlists() { const q = document.getElementById('searchInput').value.toLowerCase(); renderSetlists(setlists.filter(s => s.date.includes(q) || s.songs.some(song => song.title.toLowerCase().includes(q)))); }
         renderSetlists(setlists);
     </script>
 </body>
