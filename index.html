@@ -61,7 +61,6 @@
         .song-title { font-weight: 600; font-size: 1.1rem; }
         .song-key { background-color: var(--border-color); color: var(--text-main); padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.85rem; font-weight: 700; }
         
-        /* 강조된 곡 코멘트 스타일 */
         .song-comment { 
             margin-top: 0.5rem; 
             background-color: var(--comment-bg); 
@@ -76,8 +75,11 @@
         .yt-link, .sheet-link { text-decoration: none; font-size: 1.2rem; filter: grayscale(100%); transition: 0.2s; cursor: pointer; }
         .yt-link:hover, .sheet-link:hover { filter: grayscale(0%); transform: scale(1.1); }
 
-        .all-sheets-area { margin-top: 1.5rem; border-top: 2px solid var(--border-color); padding-top: 1rem; display: none; }
-        .full-sheet-img { width: 100%; border-radius: 8px; margin-bottom: 1rem; border: 1px solid var(--border-color); }
+        /* 전체 악보 보기 영역 */
+        .all-sheets-area { margin-top: 1.5rem; border-top: 2px solid var(--border-color); padding-top: 1.5rem; display: none; }
+        .sheet-viewer-item { margin-bottom: 2.5rem; text-align: center; }
+        .sheet-viewer-title { font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--primary-color); }
+        .full-sheet-img { width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
         details { margin-top: 1rem; background: var(--bg-color); padding: 0.8rem; border-radius: 8px; font-size: 0.9rem; }
     </style>
@@ -131,14 +133,6 @@
                     { title: "내 영혼에 햇빛 비치니", key: "G" },
                     { title: "주만 바라볼찌라", key: "A" }
                 ]
-            },
-            {
-                date: "2026-03-15",
-                songs: [
-                    { title: "내가 매일 기쁘게", key: "G" },
-                    { title: "내 영혼에 햇빛 비치니", key: "G" },
-                    { title: "주만 바라볼찌라", key: "A" }
-                ]
             }
         ];
 
@@ -173,10 +167,17 @@
                     </li>
                 `}).join('');
 
+                // 전체 악보 보기 영역 (코멘트 포함 렌더링)
                 let allSheetsHtml = songsWithSheet.length > 0 ? `
                     <button class="btn btn-outline" style="width:100%; margin-top:1.5rem;" onclick="toggleAllSheets(${idx})">🖼️ 전체 악보 펼쳐보기</button>
                     <div id="sheets-area-${idx}" class="all-sheets-area">
-                        ${songsWithSheet.map(s => `<img src="${s.sheet}" class="full-sheet-img" alt="${s.title}">`).join('')}
+                        ${songsWithSheet.map(s => `
+                            <div class="sheet-viewer-item">
+                                <div class="sheet-viewer-title">${s.title}</div>
+                                ${s.comment ? `<div class="song-comment" style="margin-bottom:10px;">${s.comment}</div>` : ''}
+                                <img src="${s.sheet}" class="full-sheet-img" alt="${s.title}" onerror="this.src='https://via.placeholder.com/400x200?text=No+Image'">
+                            </div>
+                        `).join('')}
                     </div>
                 ` : '';
 
