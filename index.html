@@ -48,12 +48,6 @@
         .btn-outline { background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
         .btn-outline:hover { background-color: var(--primary-color); color: white; }
 
-        .stats-panel { background-color: var(--card-bg); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid var(--border-color); display: none; }
-        .stats-panel h3 { margin-top: 0; display: flex; align-items: center; gap: 8px; }
-        .stats-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
-        .stats-list li { background: var(--bg-color); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; border: 1px solid var(--border-color); }
-        .stats-list span { font-weight: bold; color: var(--primary-color); margin-left: 5px; }
-
         .card { background-color: var(--card-bg); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
         .date-badge { display: inline-block; background-color: var(--primary-color); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; }
 
@@ -66,6 +60,12 @@
         .yt-link, .sheet-link { text-decoration: none; font-size: 1.2rem; filter: grayscale(100%); transition: 0.2s; cursor: pointer; }
         .yt-link:hover, .sheet-link:hover { filter: grayscale(0%); transform: scale(1.1); }
         .song-key { background-color: var(--border-color); color: var(--text-main); padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.85rem; font-weight: 700; }
+
+        /* 악보 뷰어 스타일 */
+        .all-sheets-area { margin-top: 1.5rem; border-top: 2px solid var(--border-color); padding-top: 1rem; display: none; }
+        .sheet-container { margin-bottom: 1.5rem; text-align: center; }
+        .sheet-container p { font-weight: 600; margin-bottom: 0.5rem; color: var(--primary-color); }
+        .full-sheet-img { width: 100%; max-width: 100%; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); }
 
         details { margin-top: 1rem; background: var(--bg-color); padding: 0.8rem; border-radius: 8px; font-size: 0.9rem; color: var(--text-muted); }
         summary { font-weight: 600; cursor: pointer; color: var(--text-main); }
@@ -91,23 +91,22 @@
             <button class="btn btn-outline" onclick="toggleTheme()">🌙 다크 모드</button>
         </div>
 
-        <div id="statsPanel" class="stats-panel">
+        <div id="statsPanel" style="background-color: var(--card-bg); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; border: 1px solid var(--border-color); display: none;">
             <h3>🏆 최다 선곡 TOP 5</h3>
-            <ul class="stats-list" id="statsList"></ul>
+            <ul id="statsList" style="list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px;"></ul>
         </div>
 
         <div id="setlist-container"></div>
     </div>
 
     <script>
-        // 악보를 scores 폴더에 넣으시면 됩니다!
         const setlists = [
             {
                 date: "2026-03-29",
                 songs: [
                     { title: "축복송", key: "G", sheet: "scores/축복송.jpg" },
-                    { title: "난 예수가 좋다오", key: "A", sheet: "scores/난예수가좋다오.jpg" },
                     { title: "나의 가장 낮은 마음", key: "A", sheet: "scores/나의가장낮은마음.jpg" },
+                    { title: "난 예수가 좋다오", key: "A", sheet: "scores/난예수가좋다오.jpg" },
                     { title: "내 안에 부어주소서", key: "A", sheet: "scores/내안에부어주소서.jpg" },
                     { title: "천국은 마치", key: "A", sheet: "scores/천국은마치.jpg" },
                     { title: "주만 바라볼찌라", key: "A", sheet: "scores/주만바라볼찌라.jpg" },
@@ -175,190 +174,11 @@
                 notes: "전체적으로 '기도회 찬양' 느낌으로 은혜롭게 준비."
             },
             {
-                date: "2025-12-28",
-                songs: [
-                    { title: "주의 음성을 내가 들으니", key: "G" },
-                    { title: "빛의 사자들이여", key: "G" },
-                    { title: "그 사랑", key: "G" }
-                ]
-            },
-            {
-                date: "2025-12-14",
-                songs: [
-                    { title: "내 안에 부어주소서", key: "A" },
-                    { title: "나의 가장 낮은 마음", key: "A" },
-                    { title: "꽃들도", key: "E" }
-                ]
-            },
-            {
                 date: "2025-12-07",
                 songs: [
                     { title: "오 신실 하신 주", key: "D" },
                     { title: "기뻐하며 왕께 노래 부르리", key: "F" },
                     { title: "예배합니다", key: "E" }
-                ],
-                notes: "오 신실 하신 주: 3절 후 일용할 모든 것부터 피아노와 목소리만.\n기뻐하며 왕께: F코드 피아노 후 목소리로 선창.\n예배합니다: 피아노 전주, 인도자 선창 후 드럼 진입."
-            },
-            {
-                date: "2025-11-23",
-                songs: [
-                    { title: "지금까지 지내온 것", key: "E" },
-                    { title: "감사로 제사 드리는 자가", key: "E" },
-                    { title: "비 준비하시니", key: "E" }
-                ]
-            },
-            {
-                date: "2025-11-16",
-                songs: [
-                    { title: "지금까지 지내온 것", key: "E" },
-                    { title: "감사로 제사 드리는 자가", key: "E" },
-                    { title: "비 준비하시니", key: "E" }
-                ]
-            },
-            {
-                date: "2025-11-02",
-                songs: [
-                    { title: "사랑하는 나의 아버지", key: "C" },
-                    { title: "실로암", key: "C" },
-                    { title: "은혜", key: "C" }
-                ]
-            },
-            {
-                date: "2025-10-26",
-                songs: [
-                    { title: "실로암", key: "C" },
-                    { title: "난 예수가 좋다오", key: "A" },
-                    { title: "나의 가장 낮은 마음", key: "A" },
-                    { title: "하늘소망", key: "A" }
-                ]
-            },
-            {
-                date: "2025-10-12",
-                songs: [
-                    { title: "주께 가까이", key: "A" },
-                    { title: "난 예수가 좋다오", key: "A" },
-                    { title: "예배합니다", key: "E" }
-                ]
-            },
-            {
-                date: "2025-09-14",
-                songs: [
-                    { title: "예수 사랑해요", key: "C" },
-                    { title: "내가 매일 기쁘게", key: "G" },
-                    { title: "주는 완전합니다", key: "E" }
-                ]
-            },
-            {
-                date: "2025-09-07",
-                songs: [
-                    { title: "주가 보이신 생명의 길", key: "A" },
-                    { title: "예수님 찬양", key: "A" },
-                    { title: "나는 예배자입니다", key: "F" }
-                ]
-            },
-            {
-                date: "2025-08-17",
-                songs: [
-                    { title: "예배합니다", key: "E" },
-                    { title: "오 주여 나의 마음이", key: "G" },
-                    { title: "주는 완전합니다", key: "E" }
-                ]
-            },
-            {
-                date: "2025-08-10",
-                songs: [
-                    { title: "나는 예배자입니다", key: "F" },
-                    { title: "난 예수가 좋다오", key: "A" },
-                    { title: "예수 닮기를", key: "A" }
-                ]
-            },
-            {
-                date: "2025-07-27",
-                songs: [
-                    { title: "야곱의 축복", key: "C" },
-                    { title: "천국은 마치", key: "A" },
-                    { title: "내 안에 부어주소서", key: "A" },
-                    { title: "그 사랑", key: "G" }
-                ]
-            },
-            {
-                date: "2025-07-20",
-                songs: [
-                    { title: "주가 보이신 생명의 길", key: "A" },
-                    { title: "예수님 찬양", key: "A" },
-                    { title: "나는 예배자입니다", key: "F" }
-                ]
-            },
-            {
-                date: "2025-07-13",
-                songs: [
-                    { title: "나 주앞에 엎드려", key: "C" },
-                    { title: "예수 십자가의 흘린 피로써", key: "G" },
-                    { title: "주는 완전합니다", key: "E" }
-                ]
-            },
-            {
-                date: "2025-07-06",
-                songs: [
-                    { title: "목마른 사슴 시냇물을 찾아", key: "C" },
-                    { title: "구주 예수 의지함이", key: "G" },
-                    { title: "은혜", key: "C" }
-                ]
-            },
-            {
-                date: "2025-07-01",
-                songs: [
-                    { title: "예수 닮기를", key: "A" },
-                    { title: "실로암", key: "C" },
-                    { title: "세상 모든 민족이", key: "G" }
-                ]
-            },
-            {
-                date: "2025-06-22",
-                songs: [
-                    { title: "내 모습 이대로", key: "D" },
-                    { title: "기뻐하며 왕께 노래 부르리", key: "F" },
-                    { title: "주께 가까이 날 이끄소서", key: "A" }
-                ]
-            },
-            {
-                date: "2025-06-15",
-                songs: [
-                    { title: "사랑합니다 나의 예수님", key: "G" },
-                    { title: "오 주여 나의 마음이", key: "G" },
-                    { title: "예배합니다", key: "E" }
-                ]
-            },
-            {
-                date: "2025-06-08",
-                songs: [
-                    { title: "내 영혼은 안전합니다", key: "E" },
-                    { title: "나의 가장 낮은 마음", key: "A" },
-                    { title: "주 안에 우린 하나", key: "A" }
-                ]
-            },
-            {
-                date: "2025-05-25",
-                songs: [
-                    { title: "사랑하는 나의 아버지", key: "C" },
-                    { title: "난 예수가 좋다오", key: "A" },
-                    { title: "이 땅의 황무함을 보소서", key: "A" }
-                ]
-            },
-            {
-                date: "2025-05-18",
-                songs: [
-                    { title: "보혈을 지나", key: "G" },
-                    { title: "난 예수가 좋다오", key: "A" },
-                    { title: "그 사랑", key: "G" }
-                ]
-            },
-            {
-                date: "2023-12-08",
-                songs: [
-                    { title: "때로는 너의 앞에", key: "D" },
-                    { title: "주 예수 내 맘에", key: "Ab" },
-                    { title: "부르신 곳에서", key: "E" }
                 ]
             }
         ];
@@ -367,10 +187,13 @@
             const container = document.getElementById('setlist-container');
             container.innerHTML = '';
             
-            data.forEach((setlist) => {
+            data.forEach((setlist, idx) => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 
+                // 악보가 있는 곡들만 필터링
+                const songsWithSheet = setlist.songs.filter(s => s.sheet);
+
                 let songsHtml = setlist.songs.map((song, index) => {
                     const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(song.title + ' 찬양')}`;
                     const sheetIconHtml = song.sheet ? `<a href="${song.sheet}" target="_blank" class="sheet-link" title="악보 보기">🎼</a>` : '';
@@ -386,6 +209,22 @@
                     </li>
                 `}).join('');
 
+                // 악보 전체 보기 버튼 및 영역
+                let allSheetsHtml = '';
+                if (songsWithSheet.length > 0) {
+                    allSheetsHtml = `
+                        <button class="btn btn-outline" style="width:100%; margin-top:1rem;" onclick="toggleAllSheets(${idx})">🖼️ 전체 악보 펼쳐보기</button>
+                        <div id="sheets-area-${idx}" class="all-sheets-area">
+                            ${songsWithSheet.map(s => `
+                                <div class="sheet-container">
+                                    <p>${s.title}</p>
+                                    <img src="${s.sheet}" class="full-sheet-img" alt="${s.title}" onerror="this.style.display='none';">
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+
                 let notesHtml = setlist.notes ? `
                     <details>
                         <summary>진행 메모 및 코멘트 보기</summary>
@@ -396,10 +235,19 @@
                 card.innerHTML = `
                     <div class="date-badge">${setlist.date}</div>
                     <ul class="song-list">${songsHtml}</ul>
+                    ${allSheetsHtml}
                     ${notesHtml}
                 `;
                 container.appendChild(card);
             });
+        }
+
+        // 악보 영역 토글 함수
+        function toggleAllSheets(idx) {
+            const area = document.getElementById(`sheets-area-${idx}`);
+            const isVisible = area.style.display === 'block';
+            area.style.display = isVisible ? 'none' : 'block';
+            event.target.innerText = isVisible ? '🖼️ 전체 악보 펼쳐보기' : '❌ 악보 접기';
         }
 
         function toggleStats() {
@@ -408,21 +256,14 @@
                 panel.style.display = 'none';
                 return;
             }
-
             const songCounts = {};
             setlists.forEach(s => s.songs.forEach(song => {
                 let cleanTitle = song.title.split(' - ')[0].split(' / ')[0].split(' + ')[0].replace(/ \(.*\)/, '').trim();
                 songCounts[cleanTitle] = (songCounts[cleanTitle] || 0) + 1;
             }));
-
-            const sortedSongs = Object.entries(songCounts)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 5);
-
+            const sortedSongs = Object.entries(songCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
             document.getElementById('statsList').innerHTML = sortedSongs
-                .map((song, i) => `<li>${i + 1}. ${song[0]} <span>${song[1]}회</span></li>`)
-                .join('');
-            
+                .map((song, i) => `<li style="background: var(--bg-color); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; border: 1px solid var(--border-color);">${i + 1}. ${song[0]} <span style="font-weight:bold; color:var(--primary-color);">${song[1]}회</span></li>`).join('');
             panel.style.display = 'block';
         }
 
@@ -430,19 +271,13 @@
             const query = document.getElementById('searchInput').value.toLowerCase();
             const filtered = setlists.filter(setlist => {
                 const matchDate = setlist.date.includes(query);
-                const matchSongs = setlist.songs.some(song => 
-                    song.title.toLowerCase().includes(query) || 
-                    song.key.toLowerCase().includes(query)
-                );
+                const matchSongs = setlist.songs.some(song => song.title.toLowerCase().includes(query) || song.key.toLowerCase().includes(query));
                 return matchDate || matchSongs;
             });
             renderSetlists(filtered);
         }
 
-        function toggleTheme() {
-            document.body.classList.toggle('dark-theme');
-        }
-
+        function toggleTheme() { document.body.classList.toggle('dark-theme'); }
         renderSetlists(setlists);
     </script>
 </body>
