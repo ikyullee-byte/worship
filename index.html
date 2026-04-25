@@ -95,13 +95,14 @@
             background: var(--studio-card);
             border: 1px solid var(--studio-border);
             color: white;
-            padding: 0 1.5rem;
+            padding: 0.8rem 1.5rem;
             border-radius: 100px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
         }
 
@@ -185,7 +186,22 @@
             border-color: var(--studio-accent);
         }
 
-        /* Modal & Lightbox */
+        .expand-area {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: none;
+        }
+
+        .sheet-thumb {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            border: 1px solid var(--studio-border);
+        }
+
+        /* Modal & Library */
         #sheetModal {
             display: none;
             position: fixed;
@@ -198,7 +214,7 @@
             backdrop-filter: blur(10px);
         }
 
-        #modalImg { max-width: 90%; max-height: 80vh; border-radius: 12px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        #modalImg { max-width: 90%; max-height: 80vh; border-radius: 12px; }
 
         .close-overlay {
             position: absolute; top: 30px; right: 30px;
@@ -218,7 +234,7 @@
 
         .library-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 20px;
         }
 
@@ -230,9 +246,6 @@
             border: 1px solid var(--studio-border);
             cursor: pointer;
         }
-
-        .library-card:hover { border-color: var(--studio-accent); }
-
     </style>
 </head>
 <body>
@@ -247,7 +260,7 @@
 
     <div class="controls">
         <input type="text" id="searchInput" class="search-box" placeholder="Search track or date..." onkeyup="filterSetlists()">
-        <button class="btn" onclick="openLibrary()">ARCHIVE 📚</button>
+        <button class="btn" onclick="openLibrary()">LIBRARY 📚</button>
     </div>
 
     <div id="setlist-container" class="setlist-grid"></div>
@@ -292,7 +305,7 @@
             songs: [
                 { title: "무덤에머물러", key: "A", comment: "📢 후렴구 시작. ‘사셨네’ 느리게 강조.", sheet: "scores/무덤에머물러.jpg" },
                 { title: "주하나님독생자예수", key: "A", comment: "🥁 드럼 큐 사인 후 바로 진입.", sheet: "scores/주하나님독생자예수.jpg" },
-                { title: "주님큰영광받으소서", key: "A", comment: "🎹 건반/인도자 선창 시작. 무릎 꿇고부터 다 같이.", sheet: "scores/주님큰영광받으소서.jpg" }
+                { title: "주님큰영광받으소서", key: "A", comment: "🎹 건반/인도자 선창 시작.", sheet: "scores/주님큰영광받으소서.jpg" }
             ]
         },
         {
@@ -301,10 +314,27 @@
                 { title: "축복송", key: "G", sheet: "scores/축복송.jpg" },
                 { title: "나의가장낮은마음", key: "A", sheet: "scores/나의가장낮은마음.jpg" },
                 { title: "난예수가좋다오", key: "A", comment: "📢 후렴 시작.", sheet: "scores/난예수가좋다오.jpg" },
-                { title: "내안에부어주소서", key: "A", comment: "🕺 주일학교 율동", sheet: "scores/내안에부어주소서.jpg" }
+                { title: "내안에부어주소서", key: "A", sheet: "scores/내안에부어주소서.jpg" },
+                { title: "천국은마치", key: "A", sheet: "scores/천국은마치.jpg" },
+                { title: "주만바라볼찌라", key: "A", sheet: "scores/주만바라볼찌라.jpg" },
+                { title: "이땅의황무함을보소서", key: "A", sheet: "scores/이땅의황무함을보소서.jpg" },
+                { title: "그사랑(기도회찬양)", key: "G", sheet: "scores/그사랑.jpg" }
             ]
         },
         { date: "MAR 22, 2026", songs: [{ title: "내가매일기쁘게", key: "G" }, { title: "내영혼에햇빛비치니", key: "G" }, { title: "주만바라볼찌라", key: "A" }] },
+        { date: "MAR 15, 2026", songs: [{ title: "내가매일기쁘게", key: "G" }, { title: "내영혼에햇빛비치니", key: "G" }, { title: "주만바라볼찌라", key: "A" }] },
+        { date: "MAR 08, 2026", songs: [{ title: "슬픈마음 있는 사람", key: "G" }, { title: "살아계신 주 (후렴)", key: "G" }, { title: "깊어진 삶을 주께", key: "F" }] },
+        { date: "FEB 08, 2026", songs: [{ title: "크신 주께 영광돌리세", key: "E" }, { title: "위대하고 강하신 주님", key: "E" }, { title: "주를 향한 나의 사랑을", key: "E" }] },
+        { date: "JAN 25, 2026", songs: [{ title: "보혈을 지나", key: "G" }, { title: "당신은 영광의 왕", key: "G" }] },
+        { date: "JAN 11, 2026", songs: [{ title: "기뻐하며 왕께 노래 부르리", key: "F" }, { title: "오 주여 나의 마음이", key: "F" }, { title: "비 준비하시니", key: "E" }] },
+        { date: "JAN 04, 2026", songs: [{ title: "은혜", key: "C" }, { title: "오 신실하신 주", key: "D" }, { title: "주가 일하시네", key: "C" }] },
+        { date: "DEC 28, 2025", songs: [{ title: "주의 음성을 내가 들으니", key: "G" }, { title: "빛의 사자들이여", key: "G" }, { title: "그 사랑", key: "G" }] },
+        { date: "DEC 14, 2025", songs: [{ title: "내 안에 부어주소서", key: "A" }, { title: "나의 가장 낮은 마음", key: "A" }, { title: "꽃들도", key: "E" }] },
+        { date: "DEC 07, 2025", songs: [{ title: "오 신실 하신 주", key: "D" }, { title: "기뻐하며 왕께", key: "F" }, { title: "예배합니다", key: "E" }] },
+        { date: "NOV 23, 2025", songs: [{ title: "지금까지 지내온 것", key: "E" }, { title: "감사로 제사 드리는 자가", key: "E" }, { title: "비 준비하시니", key: "E" }] },
+        { date: "NOV 02, 2025", songs: [{ title: "사랑하는 나의 아버지", key: "C" }, { title: "실로암", key: "C" }, { title: "은혜", key: "C" }] },
+        { date: "OCT 26, 2025", songs: [{ title: "실로암", key: "C" }, { title: "난예수가좋다오", key: "A" }, { title: "나의가장낮은마음", key: "A" }, { title: "하늘소망", key: "A" }] },
+        { date: "MAY 18, 2025", songs: [{ title: "보혈을 지나", key: "G" }, { title: "난예수가좋다오", key: "A" }, { title: "그사랑", key: "G" }] },
         { date: "DEC 08, 2023", songs: [{ title: "축복송", key: "D" }, { title: "주 예수 내 맘에", key: "Ab" }, { title: "부르신 곳에서", key: "E" }] }
     ];
 
@@ -313,7 +343,8 @@
 
     function renderSetlists(data) {
         const container = document.getElementById('setlist-container');
-        container.innerHTML = data.map((set) => {
+        container.innerHTML = data.map((set, idx) => {
+            const hasSheets = set.songs.some(s => s.sheet || globalSheetMap[s.title]);
             const songsHtml = set.songs.map((s) => {
                 const sheetPath = s.sheet || globalSheetMap[s.title];
                 return `
@@ -332,8 +363,25 @@
                 </div>`;
             }).join('');
 
-            return `<div class="setlist-item"><span class="date-label">${set.date}</span>${songsHtml}</div>`;
+            return `
+            <div class="setlist-item">
+                <span class="date-label">${set.date}</span>
+                ${songsHtml}
+                ${hasSheets ? `<button class="btn" style="width:100%; margin-top:1.5rem; opacity:0.7;" onclick="toggleExpand(${idx})">EXPAND SHEETS 🖼️</button>` : ''}
+                <div id="expand-${idx}" class="expand-area">
+                    ${set.songs.map(s => {
+                        const path = s.sheet || globalSheetMap[s.title];
+                        return path ? `<p style="font-size:0.8rem; margin-bottom:5px; color:var(--studio-accent);">${s.title}</p><img src="${path}" class="sheet-thumb" onclick="openSheet('${path}', '${s.title}')">` : '';
+                    }).join('')}
+                </div>
+            </div>`;
         }).join('');
+    }
+
+    function toggleExpand(idx) {
+        const el = document.getElementById(`expand-${idx}`);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+        event.target.innerText = (el.style.display === 'block') ? 'COLLAPSE ❌' : 'EXPAND SHEETS 🖼️';
     }
 
     function openSheet(path, title) {
@@ -353,7 +401,7 @@
         grid.innerHTML = Object.keys(globalSheetMap).sort().map(title => `
             <div class="library-card" onclick="openSheet('${globalSheetMap[title]}', '${title}')">
                 <div style="font-size: 2rem; margin-bottom: 10px;">🎼</div>
-                <div style="font-weight: 800;">${title}</div>
+                <div style="font-weight: 800; font-size: 0.9rem;">${title}</div>
             </div>
         `).join('');
         document.getElementById('libraryModal').style.display = 'block';
