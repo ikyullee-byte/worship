@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Worship Archive | Wonjong First</title>
+    <title>원종제일교회 찬양 아카이브</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <style>
         :root {
-            --studio-bg: #0f172a;
-            --studio-card: #1e293b;
-            --studio-accent: #38bdf8;
-            --studio-text: #f1f5f9;
-            --studio-muted: #94a3b8;
-            --studio-border: rgba(255,255,255,0.05);
-            --studio-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            --main-bg: #f8fafc;
+            --main-accent: #3b82f6;
+            --main-accent-soft: #eff6ff;
+            --main-card: #ffffff;
+            --main-text: #1e293b;
+            --main-muted: #64748b;
+            --main-border: #e2e8f0;
+            --gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
         }
 
         body {
-            background-color: var(--studio-bg);
-            color: var(--studio-text);
+            background-color: var(--main-bg);
+            color: var(--main-text);
             font-family: 'Pretendard', sans-serif;
             margin: 0;
             padding: 0;
@@ -27,256 +28,265 @@
         }
 
         header {
-            padding: 4rem 2rem 2rem;
+            padding: 5rem 2rem 3rem;
             text-align: center;
-            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle at top, #dbeafe 0%, transparent 70%);
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
-            letter-spacing: -0.05em;
+            letter-spacing: -0.04em;
             margin: 0;
-            background: var(--studio-gradient);
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         header p {
-            color: var(--studio-muted);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-top: 10px;
+            color: var(--main-muted);
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-top: 12px;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 850px;
             margin: 0 auto;
             padding: 0 1.5rem 5rem;
         }
 
         .announcement {
-            background: rgba(56, 189, 248, 0.05);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 1rem;
+            background: #ffffff;
+            border-left: 5px solid var(--main-accent);
+            padding: 1.2rem;
             border-radius: 12px;
             margin-bottom: 3rem;
-            font-size: 0.9rem;
-            color: var(--studio-accent);
-            text-align: center;
-            backdrop-filter: blur(10px);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--main-text);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .controls {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             margin-bottom: 3rem;
         }
 
         .search-box {
             flex: 1;
-            background: var(--studio-card);
-            border: 1px solid var(--studio-border);
+            background: var(--main-card);
+            border: 2px solid var(--main-border);
             padding: 1rem 1.5rem;
-            border-radius: 100px;
-            color: white;
+            border-radius: 16px;
+            color: var(--main-text);
             font-size: 1rem;
+            font-weight: 500;
             outline: none;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .search-box:focus {
-            border-color: var(--studio-accent);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+            border-color: var(--main-accent);
+            box-shadow: 0 0 0 4px var(--main-accent-soft);
         }
 
         .btn {
-            background: var(--studio-card);
-            border: 1px solid var(--studio-border);
+            background: var(--main-text);
             color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 100px;
+            padding: 0 1.8rem;
+            border-radius: 16px;
+            border: none;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-weight: 700;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            white-space: nowrap;
         }
 
         .btn:hover {
-            background: var(--studio-text);
-            color: var(--studio-bg);
+            background: var(--main-accent);
             transform: translateY(-2px);
-        }
-
-        .setlist-grid {
-            display: grid;
-            gap: 2rem;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
         }
 
         .setlist-item {
-            background: var(--studio-card);
-            border-radius: 24px;
-            padding: 2rem;
-            border: 1px solid var(--studio-border);
+            background: var(--main-card);
+            border-radius: 28px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--main-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
             transition: transform 0.3s ease;
         }
 
         .date-label {
-            font-size: 0.8rem;
-            color: var(--studio-accent);
-            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--main-accent);
+            font-weight: 800;
             margin-bottom: 1.5rem;
             display: block;
-            letter-spacing: 0.1em;
         }
 
         .song-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--main-border);
         }
 
         .song-row:last-child { border-bottom: none; }
 
-        .song-main { display: flex; align-items: center; gap: 15px; }
+        .song-main { display: flex; align-items: center; gap: 12px; }
 
-        .song-title { font-size: 1.2rem; font-weight: 700; color: #fff; }
+        .song-title { font-size: 1.25rem; font-weight: 800; color: var(--main-text); }
 
         .song-key {
-            font-size: 0.7rem;
-            color: var(--studio-accent);
-            border: 1px solid var(--studio-accent);
-            padding: 2px 8px;
-            border-radius: 4px;
+            background: var(--main-accent-soft);
+            color: var(--main-accent);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
             font-weight: 800;
         }
 
         .song-comment {
-            font-size: 0.85rem;
-            color: var(--studio-muted);
-            margin-top: 5px;
+            font-size: 0.9rem;
+            color: var(--main-muted);
+            margin-top: 6px;
+            font-weight: 500;
         }
 
         .action-btns { display: flex; gap: 10px; }
 
         .icon-btn {
-            background: rgba(255,255,255,0.05);
-            width: 36px;
-            height: 36px;
+            background: #f1f5f9;
+            width: 42px;
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
+            border-radius: 12px;
             text-decoration: none;
-            color: white;
-            font-size: 1rem;
+            color: var(--main-text);
+            font-weight: 700;
             transition: all 0.2s ease;
-            border: 1px solid transparent;
             cursor: pointer;
+            border: none;
         }
 
         .icon-btn:hover {
-            background: var(--studio-accent);
-            border-color: var(--studio-accent);
+            background: var(--main-accent);
+            color: white;
         }
 
         .expand-area {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px dashed var(--main-border);
             display: none;
         }
 
         .sheet-thumb {
             width: 100%;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
             cursor: pointer;
-            border: 1px solid var(--studio-border);
+            border: 1px solid var(--main-border);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        /* Modal & Library */
+        /* Modal */
         #sheetModal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             z-index: 9999;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            backdrop-filter: blur(10px);
         }
 
-        #modalImg { max-width: 90%; max-height: 80vh; border-radius: 12px; }
+        #modalImg { max-width: 92%; max-height: 82vh; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
 
         .close-overlay {
             position: absolute; top: 30px; right: 30px;
-            font-size: 1rem; color: #fff; background: rgba(255,255,255,0.1);
-            padding: 10px 20px; border-radius: 100px; cursor: pointer;
+            background: var(--main-text); color: white;
+            padding: 12px 24px; border-radius: 100px; cursor: pointer;
+            font-weight: 700;
         }
 
         #libraryModal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--studio-bg);
+            background: var(--main-bg);
             z-index: 5000;
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             overflow-y: auto;
         }
 
         .library-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 20px;
         }
 
         .library-card {
-            background: var(--studio-card);
-            padding: 2rem;
-            border-radius: 20px;
+            background: var(--main-card);
+            padding: 2.5rem 1.5rem;
+            border-radius: 24px;
             text-align: center;
-            border: 1px solid var(--studio-border);
+            border: 1px solid var(--main-border);
             cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .library-card:hover { 
+            border-color: var(--main-accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>WORSHIP ARCHIVE</h1>
-    <p>Wonjong First Community</p>
+    <h1>찬양 아카이브</h1>
+    <p>원종제일교회 찬양팀</p>
 </header>
 
 <div class="container">
-    <div class="announcement">📢 보면대를 꼭 정리해주시기바랍니다.</div>
+    <div class="announcement">📢 보면대를 꼭 정리해주시기 바랍니다.</div>
 
     <div class="controls">
-        <input type="text" id="searchInput" class="search-box" placeholder="Search track or date..." onkeyup="filterSetlists()">
-        <button class="btn" onclick="openLibrary()">LIBRARY 📚</button>
+        <input type="text" id="searchInput" class="search-box" placeholder="곡명 또는 날짜로 검색하세요..." onkeyup="filterSetlists()">
+        <button class="btn" onclick="openLibrary()">곡 보관함 📚</button>
     </div>
 
-    <div id="setlist-container" class="setlist-grid"></div>
+    <div id="setlist-container"></div>
 </div>
 
 <div id="sheetModal" onclick="closeSheet()">
-    <div class="close-overlay">CLOSE</div>
+    <div class="close-overlay">돌아가기</div>
     <img id="modalImg" src="">
-    <div id="modalCaption" style="margin-top: 20px; font-weight: 700; letter-spacing: 0.1em;"></div>
+    <div id="modalCaption" style="margin-top: 20px; font-weight: 800; font-size: 1.2rem;"></div>
 </div>
 
 <div id="libraryModal">
     <div class="container">
-        <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
-            <h2 style="font-size: 2rem; margin:0;">LIBRARY</h2>
-            <button class="btn" onclick="closeLibrary()">EXIT</button>
+        <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 4rem;">
+            <h2 style="font-size: 2.2rem; font-weight: 800; margin:0;">전체 악보 목록</h2>
+            <button class="btn" onclick="closeLibrary()">닫기</button>
         </div>
         <div id="libraryGrid" class="library-grid"></div>
     </div>
@@ -285,7 +295,7 @@
 <script>
     const setlists = [
         {
-            date: "APR 26, 2026",
+            date: "2026년 4월 26일",
             songs: [
                 { title: "주의음성을내가들으니", key: "G", sheet: "scores/주의음성을내가들으니.jpg" },
                 { title: "내가매일기쁘게", key: "G", sheet: "scores/내가매일기쁘게.jpg" },
@@ -293,7 +303,7 @@
             ]
         },
         {
-            date: "APR 19, 2026",
+            date: "2026년 4월 19일",
             songs: [
                 { title: "내가매일기쁘게", key: "G", sheet: "scores/내가매일기쁘게.jpg" },
                 { title: "내영혼에햇빛비치니", key: "G", sheet: "scores/내영혼에햇빛비치니.jpg" },
@@ -301,7 +311,7 @@
             ]
         },
         {
-            date: "APR 12, 2026",
+            date: "2026년 4월 12일",
             songs: [
                 { title: "무덤에머물러", key: "A", comment: "📢 후렴구 시작. ‘사셨네’ 느리게 강조.", sheet: "scores/무덤에머물러.jpg" },
                 { title: "주하나님독생자예수", key: "A", comment: "🥁 드럼 큐 사인 후 바로 진입.", sheet: "scores/주하나님독생자예수.jpg" },
@@ -309,7 +319,7 @@
             ]
         },
         {
-            date: "MAR 29, 2026",
+            date: "2026년 3월 29일",
             songs: [
                 { title: "축복송", key: "G", sheet: "scores/축복송.jpg" },
                 { title: "나의가장낮은마음", key: "A", sheet: "scores/나의가장낮은마음.jpg" },
@@ -321,21 +331,9 @@
                 { title: "그사랑(기도회찬양)", key: "G", sheet: "scores/그사랑.jpg" }
             ]
         },
-        { date: "MAR 22, 2026", songs: [{ title: "내가매일기쁘게", key: "G" }, { title: "내영혼에햇빛비치니", key: "G" }, { title: "주만바라볼찌라", key: "A" }] },
-        { date: "MAR 15, 2026", songs: [{ title: "내가매일기쁘게", key: "G" }, { title: "내영혼에햇빛비치니", key: "G" }, { title: "주만바라볼찌라", key: "A" }] },
-        { date: "MAR 08, 2026", songs: [{ title: "슬픈마음 있는 사람", key: "G" }, { title: "살아계신 주 (후렴)", key: "G" }, { title: "깊어진 삶을 주께", key: "F" }] },
-        { date: "FEB 08, 2026", songs: [{ title: "크신 주께 영광돌리세", key: "E" }, { title: "위대하고 강하신 주님", key: "E" }, { title: "주를 향한 나의 사랑을", key: "E" }] },
-        { date: "JAN 25, 2026", songs: [{ title: "보혈을 지나", key: "G" }, { title: "당신은 영광의 왕", key: "G" }] },
-        { date: "JAN 11, 2026", songs: [{ title: "기뻐하며 왕께 노래 부르리", key: "F" }, { title: "오 주여 나의 마음이", key: "F" }, { title: "비 준비하시니", key: "E" }] },
-        { date: "JAN 04, 2026", songs: [{ title: "은혜", key: "C" }, { title: "오 신실하신 주", key: "D" }, { title: "주가 일하시네", key: "C" }] },
-        { date: "DEC 28, 2025", songs: [{ title: "주의 음성을 내가 들으니", key: "G" }, { title: "빛의 사자들이여", key: "G" }, { title: "그 사랑", key: "G" }] },
-        { date: "DEC 14, 2025", songs: [{ title: "내 안에 부어주소서", key: "A" }, { title: "나의 가장 낮은 마음", key: "A" }, { title: "꽃들도", key: "E" }] },
-        { date: "DEC 07, 2025", songs: [{ title: "오 신실 하신 주", key: "D" }, { title: "기뻐하며 왕께", key: "F" }, { title: "예배합니다", key: "E" }] },
-        { date: "NOV 23, 2025", songs: [{ title: "지금까지 지내온 것", key: "E" }, { title: "감사로 제사 드리는 자가", key: "E" }, { title: "비 준비하시니", key: "E" }] },
-        { date: "NOV 02, 2025", songs: [{ title: "사랑하는 나의 아버지", key: "C" }, { title: "실로암", key: "C" }, { title: "은혜", key: "C" }] },
-        { date: "OCT 26, 2025", songs: [{ title: "실로암", key: "C" }, { title: "난예수가좋다오", key: "A" }, { title: "나의가장낮은마음", key: "A" }, { title: "하늘소망", key: "A" }] },
-        { date: "MAY 18, 2025", songs: [{ title: "보혈을 지나", key: "G" }, { title: "난예수가좋다오", key: "A" }, { title: "그사랑", key: "G" }] },
-        { date: "DEC 08, 2023", songs: [{ title: "축복송", key: "D" }, { title: "주 예수 내 맘에", key: "Ab" }, { title: "부르신 곳에서", key: "E" }] }
+        { date: "2026년 3월 22일", songs: [{ title: "내가매일기쁘게", key: "G" }, { title: "내영혼에햇빛비치니", key: "G" }, { title: "주만바라볼찌라", key: "A" }] },
+        { date: "2025년 10월 26일", songs: [{ title: "실로암", key: "C" }, { title: "난예수가좋다오", key: "A" }, { title: "나의가장낮은마음", key: "A" }, { title: "하늘소망", key: "A" }] },
+        { date: "2023년 12월 8일", songs: [{ title: "축복송", key: "D" }, { title: "주 예수 내 맘에", key: "Ab" }, { title: "부르신 곳에서", key: "E" }] }
     ];
 
     const globalSheetMap = {};
@@ -357,8 +355,8 @@
                         ${s.comment ? `<div class="song-comment">${s.comment}</div>` : ''}
                     </div>
                     <div class="action-btns">
-                        <a href="https://www.youtube.com/results?search_query=${s.title} 찬양" target="_blank" class="icon-btn">YT</a>
-                        ${sheetPath ? `<div onclick="openSheet('${sheetPath}', '${s.title}')" class="icon-btn">🎼</div>` : ''}
+                        <a href="https://www.youtube.com/results?search_query=${s.title} 찬양" target="_blank" class="icon-btn" title="유튜브">▶</a>
+                        ${sheetPath ? `<div onclick="openSheet('${sheetPath}', '${s.title}')" class="icon-btn" title="악보">🎼</div>` : ''}
                     </div>
                 </div>`;
             }).join('');
@@ -367,11 +365,11 @@
             <div class="setlist-item">
                 <span class="date-label">${set.date}</span>
                 ${songsHtml}
-                ${hasSheets ? `<button class="btn" style="width:100%; margin-top:1.5rem; opacity:0.7;" onclick="toggleExpand(${idx})">EXPAND SHEETS 🖼️</button>` : ''}
+                ${hasSheets ? `<button class="btn" style="width:100%; margin-top:2rem; background: #f1f5f9; color: #475569;" onclick="toggleExpand(${idx})">이미지로 악보 모두 펼치기 🖼️</button>` : ''}
                 <div id="expand-${idx}" class="expand-area">
                     ${set.songs.map(s => {
                         const path = s.sheet || globalSheetMap[s.title];
-                        return path ? `<p style="font-size:0.8rem; margin-bottom:5px; color:var(--studio-accent);">${s.title}</p><img src="${path}" class="sheet-thumb" onclick="openSheet('${path}', '${s.title}')">` : '';
+                        return path ? `<p style="font-weight:700; margin-bottom:10px; color:var(--main-accent);">${s.title}</p><img src="${path}" class="sheet-thumb" onclick="openSheet('${path}', '${s.title}')">` : '';
                     }).join('')}
                 </div>
             </div>`;
@@ -380,13 +378,14 @@
 
     function toggleExpand(idx) {
         const el = document.getElementById(`expand-${idx}`);
-        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
-        event.target.innerText = (el.style.display === 'block') ? 'COLLAPSE ❌' : 'EXPAND SHEETS 🖼️';
+        const isShow = el.style.display === 'block';
+        el.style.display = isShow ? 'none' : 'block';
+        event.target.innerText = isShow ? '이미지로 악보 모두 펼치기 🖼️' : '악보 접기 ❌';
     }
 
     function openSheet(path, title) {
         document.getElementById('modalImg').src = path;
-        document.getElementById('modalCaption').innerText = title.toUpperCase();
+        document.getElementById('modalCaption').innerText = title;
         document.getElementById('sheetModal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
@@ -400,8 +399,8 @@
         const grid = document.getElementById('libraryGrid');
         grid.innerHTML = Object.keys(globalSheetMap).sort().map(title => `
             <div class="library-card" onclick="openSheet('${globalSheetMap[title]}', '${title}')">
-                <div style="font-size: 2rem; margin-bottom: 10px;">🎼</div>
-                <div style="font-weight: 800; font-size: 0.9rem;">${title}</div>
+                <div style="font-size: 2.2rem; margin-bottom: 15px;">🎼</div>
+                <div style="font-weight: 800; font-size: 1rem;">${title}</div>
             </div>
         `).join('');
         document.getElementById('libraryModal').style.display = 'block';
