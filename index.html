@@ -295,6 +295,15 @@
 <script>
     const setlists = [
         {
+            date: "2026년 5월 3일",
+            songs: [
+                { title: "야곱의축복", key: "C", sheet: "scores/야곱의축복.jpg" },
+                { title: "천국은마치", key: "A", sheet: "scores/천국은마치.jpg" },
+                { title: "내안에부어주소서", key: "A", sheet: "scores/내안에부어주소서.jpg" },
+                { title: "그사랑", key: "G", sheet: "scores/그사랑.jpg" }
+            ]
+        },
+        {
             date: "2026년 4월 26일",
             songs: [
                 { title: "주의음성을내가들으니", key: "G", sheet: "scores/주의음성을내가들으니.jpg" },
@@ -328,12 +337,39 @@
                 { title: "천국은마치", key: "A", sheet: "scores/천국은마치.jpg" },
                 { title: "주만바라볼찌라", key: "A", sheet: "scores/주만바라볼찌라.jpg" },
                 { title: "이땅의황무함을보소서", key: "A", sheet: "scores/이땅의황무함을보소서.jpg" },
-                { title: "그사랑(기도회찬양)", key: "G", sheet: "scores/그사랑.jpg" }
+                { title: "그사랑", key: "G", sheet: "scores/그사랑.jpg" }
             ]
         },
         { date: "2026년 3월 22일", songs: [{ title: "내가매일기쁘게", key: "G" }, { title: "내영혼에햇빛비치니", key: "G" }, { title: "주만바라볼찌라", key: "A" }] },
+        { date: "2026년 3월 15일", songs: [{ title: "내가매일기쁘게", key: "G" }, { title: "내영혼에햇빛비치니", key: "G" }, { title: "주만바라볼찌라", key: "A" }] },
+        { date: "2026년 3월 8일", songs: [{ title: "슬픈마음있는사람", key: "G" }, { title: "살아계신주", key: "G" }, { title: "깊어진삶을주께", key: "F" }] },
+        { date: "2026년 2월 8일", songs: [{ title: "크신주께영광돌리세", key: "E" }, { title: "위대하고강하신주님", key: "E" }, { title: "주를향한나의사랑을", key: "E" }] },
+        { date: "2026년 1월 25일", songs: [{ title: "보혈을지나", key: "G" }, { title: "당신은영광의왕", key: "G" }] },
+        { date: "2026년 1월 11일", songs: [{ title: "기뻐하며왕께노래부르리", key: "F" }, { title: "오주여나의마음이", key: "F" }, { title: "비준비하시니", key: "E" }] },
+        { date: "2026년 1월 4일", songs: [{ title: "은혜", key: "C" }, { title: "오신실하신주", key: "D" }, { title: "주가일하시네", key: "C" }] },
+        { date: "2025년 12월 28일", songs: [{ title: "주의음성을내가들으니", key: "G" }, { title: "빛의사자들이여", key: "G" }, { title: "그사랑", key: "G" }] },
+        { date: "2025년 12월 14일", songs: [{ title: "내안에부어주소서", key: "A" }, { title: "나의가장낮은마음", key: "A" }, { title: "꽃들도", key: "E" }] },
+        { date: "2025년 12월 7일", songs: [{ title: "오신실하신주", key: "D" }, { title: "기뻐하며왕께", key: "F" }, { title: "예배합니다", key: "E" }] },
+        { date: "2025년 11월 23일", songs: [{ title: "지금까지지내온것", key: "E" }, { title: "감사로제사드리는자가", key: "E" }, { title: "비준비하시니", key: "E" }] },
+        { date: "2025년 11월 16일", songs: [{ title: "지금까지지내온것", key: "E" }, { title: "감사로제사드리는자가", key: "E" }, { title: "비준비하시니", key: "E" }] },
+        { date: "2025년 11월 2일", songs: [{ title: "사랑하는나의아버지", key: "C" }, { title: "실로암", key: "C" }, { title: "은혜", key: "C" }] },
         { date: "2025년 10월 26일", songs: [{ title: "실로암", key: "C" }, { title: "난예수가좋다오", key: "A" }, { title: "나의가장낮은마음", key: "A" }, { title: "하늘소망", key: "A" }] },
-        { date: "2023년 12월 8일", songs: [{ title: "축복송", key: "D" }, { title: "주 예수 내 맘에", key: "Ab" }, { title: "부르신 곳에서", key: "E" }] }
+        { date: "2025년 10월 12일", songs: [{ title: "주께가까이", key: "A" }, { title: "난예수가좋다오", key: "A" }, { title: "예배합니다", key: "E" }] },
+        { date: "2025년 9월 14일", songs: [{ title: "예수사랑해요", key: "C" }, { title: "내가매일기쁘게", key: "G" }, { title: "주는완전합니다", key: "E" }] },
+        { date: "2025년 9월 7일", songs: [{ title: "주가보이신생명의길", key: "A" }, { title: "예수님찬양", key: "A" }, { title: "나는예배자입니다", key: "F" }] },
+        { date: "2025년 8월 17일", songs: [{ title: "예배합니다", key: "E" }, { title: "오주여나의마음이", key: "G" }, { title: "주는완전합니다", key: "E" }] },
+        { date: "2025년 8월 10일", songs: [{ title: "나는예배자입니다", key: "F" }, { title: "난예수가좋다오", key: "A" }, { title: "예수닮기를", key: "A" }] },
+        { date: "2025년 7월 27일", songs: [{ title: "야곱의축복", key: "C" }, { title: "천국은마치", key: "A" }, { title: "내안에부어주소서", key: "A" }, { title: "그사랑", key: "G" }] },
+        { date: "2025년 7월 20일", songs: [{ title: "주가보이신생명의길", key: "A" }, { title: "예수님찬양", key: "A" }, { title: "나는예배자입니다", key: "F" }] },
+        { date: "2025년 7월 13일", songs: [{ title: "나주앞에엎드려", key: "C" }, { title: "내가매일기쁘게", key: "G" }, { title: "주는완전합니다", key: "E" }] },
+        { date: "2025년 7월 6일", songs: [{ title: "목마른사슴시냇물을찾아", key: "C" }, { title: "구주예수의지함이", key: "G" }, { title: "은혜", key: "C" }] },
+        { date: "2025년 7월 1일", songs: [{ title: "예수닮기를", key: "A" }, { title: "실로암", key: "C" }, { title: "세상모든민족이", key: "G" }] },
+        { date: "2025년 6월 22일", songs: [{ title: "내모습이대로", key: "D" }, { title: "기뻐하며왕께", key: "F" }, { title: "주께가까이날이끄소서", key: "A" }] },
+        { date: "2025년 6월 15일", songs: [{ title: "사랑합니다나의예수님", key: "G" }, { title: "오주여나의마음이", key: "G" }, { title: "예배합니다", key: "E" }] },
+        { date: "2025년 6월 8일", songs: [{ title: "내영혼은안전합니다", key: "E" }, { title: "나의가장낮은마음", key: "A" }, { title: "주안에우린하나", key: "A" }] },
+        { date: "2025년 5월 25일", songs: [{ title: "사랑하는나의아버지", key: "C" }, { title: "난예수가좋다오", key: "A" }, { title: "이땅의황무함을보소서", key: "A" }] },
+        { date: "2025년 5월 18일", songs: [{ title: "보혈을지나", key: "G" }, { title: "난예수가좋다오", key: "A" }, { title: "그사랑", key: "G" }] },
+        { date: "2023년 12월 8일", songs: [{ title: "축복송", key: "D" }, { title: "주예수내맘에", key: "Ab" }, { title: "부르신곳에서", key: "E" }] }
     ];
 
     const globalSheetMap = {};
@@ -409,8 +445,8 @@
     function closeLibrary() { document.getElementById('libraryModal').style.display = 'none'; }
 
     function filterSetlists() {
-        const q = document.getElementById('searchInput').value.toLowerCase();
-        renderSetlists(setlists.filter(s => s.date.toLowerCase().includes(q) || s.songs.some(song => song.title.toLowerCase().includes(q))));
+        const q = document.getElementById('searchInput').value.toLowerCase().replace(/\s/g, '');
+        renderSetlists(setlists.filter(s => s.date.toLowerCase().replace(/\s/g, '').includes(q) || s.songs.some(song => song.title.toLowerCase().includes(q))));
     }
 
     renderSetlists(setlists);
