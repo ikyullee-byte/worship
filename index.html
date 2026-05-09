@@ -15,247 +15,54 @@
             --main-muted: #64748b;
             --main-border: #e2e8f0;
             --gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            --alert-bg: #fef2f2;
+            --alert-text: #ef4444;
+            --alert-border: #fee2e2;
         }
 
-        body {
-            background-color: var(--main-bg);
-            color: var(--main-text);
-            font-family: 'Pretendard', sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+        body { background-color: var(--main-bg); color: var(--main-text); font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        header { padding: 5rem 2rem 3rem; text-align: center; background: radial-gradient(circle at top, #dbeafe 0%, transparent 70%); }
+        header h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.04em; margin: 0; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        header p { color: var(--main-muted); font-size: 1rem; font-weight: 600; letter-spacing: 0.1em; margin-top: 12px; }
+        .container { max-width: 850px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+        
+        .announcement { background: #ffffff; border-left: 5px solid var(--main-accent); padding: 1.2rem; border-radius: 12px; margin-bottom: 3rem; font-size: 1rem; font-weight: 700; color: var(--main-text); box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 12px; }
+        
+        .controls { display: flex; gap: 12px; margin-bottom: 3rem; }
+        .search-box { flex: 1; background: var(--main-card); border: 2px solid var(--main-border); padding: 1rem 1.5rem; border-radius: 16px; color: var(--main-text); font-size: 1rem; font-weight: 500; outline: none; transition: all 0.2s ease; }
+        .search-box:focus { border-color: var(--main-accent); box-shadow: 0 0 0 4px var(--main-accent-soft); }
+        .btn { background: var(--main-text); color: white; padding: 0 1.8rem; border-radius: 16px; border: none; cursor: pointer; font-weight: 700; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; white-space: nowrap; }
+        .btn:hover { background: var(--main-accent); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3); }
 
-        header {
-            padding: 5rem 2rem 3rem;
-            text-align: center;
-            background: radial-gradient(circle at top, #dbeafe 0%, transparent 70%);
-        }
-
-        header h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            margin: 0;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        header p {
-            color: var(--main-muted);
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            margin-top: 12px;
-        }
-
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 0 1.5rem 5rem;
-        }
-
-        .announcement {
-            background: #ffffff;
-            border-left: 5px solid var(--main-accent);
-            padding: 1.2rem;
-            border-radius: 12px;
-            margin-bottom: 3rem;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--main-text);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .controls {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 3rem;
-        }
-
-        .search-box {
-            flex: 1;
-            background: var(--main-card);
-            border: 2px solid var(--main-border);
-            padding: 1rem 1.5rem;
-            border-radius: 16px;
-            color: var(--main-text);
-            font-size: 1rem;
-            font-weight: 500;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-
-        .search-box:focus {
-            border-color: var(--main-accent);
-            box-shadow: 0 0 0 4px var(--main-accent-soft);
-        }
-
-        .btn {
-            background: var(--main-text);
-            color: white;
-            padding: 0 1.8rem;
-            border-radius: 16px;
-            border: none;
-            cursor: pointer;
-            font-weight: 700;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            white-space: nowrap;
-        }
-
-        .btn:hover {
-            background: var(--main-accent);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-        }
-
-        .setlist-item {
-            background: var(--main-card);
-            border-radius: 28px;
-            padding: 2.5rem;
-            margin-bottom: 2.5rem;
-            border: 1px solid var(--main-border);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            transition: transform 0.3s ease;
-        }
-
-        .date-label {
-            font-size: 0.9rem;
-            color: var(--main-accent);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .song-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.2rem 0;
-            border-bottom: 1px solid var(--main-border);
-        }
-
+        .setlist-item { background: var(--main-card); border-radius: 28px; padding: 2.5rem; margin-bottom: 2.5rem; border: 1px solid var(--main-border); box-shadow: 0 10px 30px rgba(0,0,0,0.03); transition: transform 0.3s ease; }
+        .date-label { font-size: 0.9rem; color: var(--main-accent); font-weight: 800; margin-bottom: 1.5rem; display: block; }
+        
+        .song-row { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 0; border-bottom: 1px solid var(--main-border); }
         .song-row:last-child { border-bottom: none; }
-
         .song-main { display: flex; align-items: center; gap: 12px; }
-
         .song-title { font-size: 1.25rem; font-weight: 800; color: var(--main-text); }
-
-        .song-key {
-            background: var(--main-accent-soft);
-            color: var(--main-accent);
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 800;
-        }
-
-        .song-comment {
-            font-size: 0.9rem;
-            color: var(--main-muted);
-            margin-top: 6px;
-            font-weight: 500;
-        }
+        .song-key { background: var(--main-accent-soft); color: var(--main-accent); padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; }
+        
+        .song-comment { font-size: 0.9rem; color: var(--main-muted); margin-top: 6px; font-weight: 500; }
+        /* 복구된 강조 코멘트(transition) 스타일 */
+        .transition-note { display: inline-block; margin-top: 8px; background-color: var(--alert-bg); color: var(--alert-text); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; border: 1px solid var(--alert-border); }
 
         .action-btns { display: flex; gap: 10px; }
+        .icon-btn { background: #f1f5f9; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 12px; text-decoration: none; color: var(--main-text); font-weight: 700; transition: all 0.2s ease; cursor: pointer; border: none; }
+        .icon-btn:hover { background: var(--main-accent); color: white; }
 
-        .icon-btn {
-            background: #f1f5f9;
-            width: 42px;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            text-decoration: none;
-            color: var(--main-text);
-            font-weight: 700;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            border: none;
-        }
+        .expand-area { margin-top: 2rem; padding-top: 2rem; border-top: 2px dashed var(--main-border); display: none; }
+        .sheet-thumb { width: 100%; border-radius: 20px; margin-bottom: 2rem; cursor: pointer; border: 1px solid var(--main-border); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
-        .icon-btn:hover {
-            background: var(--main-accent);
-            color: white;
-        }
-
-        .expand-area {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 2px dashed var(--main-border);
-            display: none;
-        }
-
-        .sheet-thumb {
-            width: 100%;
-            border-radius: 20px;
-            margin-bottom: 2rem;
-            cursor: pointer;
-            border: 1px solid var(--main-border);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        /* Modal */
-        #sheetModal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
+        /* 모달창들 */
+        #sheetModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.98); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; }
         #modalImg { max-width: 92%; max-height: 82vh; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
-
-        .close-overlay {
-            position: absolute; top: 30px; right: 30px;
-            background: var(--main-text); color: white;
-            padding: 12px 24px; border-radius: 100px; cursor: pointer;
-            font-weight: 700;
-        }
-
-        #libraryModal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--main-bg);
-            z-index: 5000;
-            padding: 5rem 2rem;
-            overflow-y: auto;
-        }
-
-        .library-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 20px;
-        }
-
-        .library-card {
-            background: var(--main-card);
-            padding: 2.5rem 1.5rem;
-            border-radius: 24px;
-            text-align: center;
-            border: 1px solid var(--main-border);
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .library-card:hover { 
-            border-color: var(--main-accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
-        }
+        .close-overlay { position: absolute; top: 30px; right: 30px; background: var(--main-text); color: white; padding: 12px 24px; border-radius: 100px; cursor: pointer; font-weight: 700; }
+        
+        #libraryModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--main-bg); z-index: 5000; padding: 5rem 2rem; overflow-y: auto; }
+        .library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+        .library-card { background: var(--main-card); padding: 2.5rem 1.5rem; border-radius: 24px; text-align: center; border: 1px solid var(--main-border); cursor: pointer; transition: all 0.2s ease; }
+        .library-card:hover { border-color: var(--main-accent); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1); }
     </style>
 </head>
 <body>
@@ -295,6 +102,14 @@
 <script>
     const setlists = [
         {
+            date: "2026년 5월 10일",
+            songs: [
+                { title: "내가매일기쁘게", key: "G", sheet: "scores/내가매일기쁘게.jpg" },
+                { title: "내영혼에햇빛비치니", key: "G", sheet: "scores/내영혼에햇빛비치니.jpg" },
+                { title: "주만바라볼찌라", key: "A", sheet: "scores/주만바라볼찌라.jpg" }
+            ]
+        },
+        {
             date: "2026년 5월 3일",
             songs: [
                 { title: "야곱의축복", key: "C", sheet: "scores/야곱의축복.jpg" },
@@ -322,9 +137,9 @@
         {
             date: "2026년 4월 12일",
             songs: [
-                { title: "무덤에머물러", key: "A", comment: "📢 후렴구 시작. ‘사셨네’ 느리게 강조.", sheet: "scores/무덤에머물러.jpg" },
-                { title: "주하나님독생자예수", key: "A", comment: "🥁 드럼 큐 사인 후 바로 진입.", sheet: "scores/주하나님독생자예수.jpg" },
-                { title: "주님큰영광받으소서", key: "A", comment: "🎹 건반/인도자 선창 시작.", sheet: "scores/주님큰영광받으소서.jpg" }
+                { title: "무덤에머물러", key: "A", comment: "📢 레퍼런스처럼 후렴구부터 시작. ‘사셨네’ 반복 시 ‘예수 다시 사~~셨네’ 느리게.", sheet: "scores/무덤에머물러.jpg" },
+                { title: "주하나님독생자예수", key: "A", comment: "🥁 드럼 칙칙칙 후 바로 진입. 마지막 후렴 느리게.", transition: "☝️ 드럼 큐 사인 확인 필수!", sheet: "scores/주하나님독생자예수.jpg" },
+                { title: "주님큰영광받으소서", key: "A", comment: "🎹 건반/인도자 선창 시작. ‘겸손하게 우리 무릎 꿇고’부터 다 같이. 통성 기도 때 후렴 반복.", sheet: "scores/주님큰영광받으소서.jpg" }
             ]
         },
         {
@@ -332,12 +147,12 @@
             songs: [
                 { title: "축복송", key: "G", sheet: "scores/축복송.jpg" },
                 { title: "나의가장낮은마음", key: "A", sheet: "scores/나의가장낮은마음.jpg" },
-                { title: "난예수가좋다오", key: "A", comment: "📢 후렴 시작.", sheet: "scores/난예수가좋다오.jpg" },
-                { title: "내안에부어주소서", key: "A", sheet: "scores/내안에부어주소서.jpg" },
-                { title: "천국은마치", key: "A", sheet: "scores/천국은마치.jpg" },
+                { title: "난예수가좋다오", key: "A", comment: "📢 후렴으로 시작합니다.", sheet: "scores/난예수가좋다오.jpg" },
+                { title: "내안에부어주소서", key: "A", comment: "🕺 주일학교 율동과 함께", sheet: "scores/내안에부어주소서.jpg" },
+                { title: "천국은마치", key: "A", comment: "🕺 주일학교 율동과 함께", sheet: "scores/천국은마치.jpg" },
                 { title: "주만바라볼찌라", key: "A", sheet: "scores/주만바라볼찌라.jpg" },
-                { title: "이땅의황무함을보소서", key: "A", sheet: "scores/이땅의황무함을보소서.jpg" },
-                { title: "그사랑", key: "G", sheet: "scores/그사랑.jpg" }
+                { title: "이땅의황무함을보소서", key: "A", comment: "📢 후렴으로 시작합니다.", sheet: "scores/이땅의황무함을보소서.jpg" },
+                { title: "그사랑(기도회찬양)", key: "G", sheet: "scores/그사랑.jpg" }
             ]
         },
         { date: "2026년 3월 22일", songs: [{ title: "내가매일기쁘게", key: "G" }, { title: "내영혼에햇빛비치니", key: "G" }, { title: "주만바라볼찌라", key: "A" }] },
@@ -383,12 +198,13 @@
                 const sheetPath = s.sheet || globalSheetMap[s.title];
                 return `
                 <div class="song-row">
-                    <div>
+                    <div style="flex: 1; padding-right: 15px;">
                         <div class="song-main">
                             <span class="song-title">${s.title}</span>
                             <span class="song-key">${s.key}</span>
                         </div>
                         ${s.comment ? `<div class="song-comment">${s.comment}</div>` : ''}
+                        ${s.transition ? `<div class="transition-note">${s.transition}</div>` : ''}
                     </div>
                     <div class="action-btns">
                         <a href="https://www.youtube.com/results?search_query=${s.title} 찬양" target="_blank" class="icon-btn" title="유튜브">▶</a>
