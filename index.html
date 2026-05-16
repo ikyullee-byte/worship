@@ -84,7 +84,7 @@
 
 <div id="sheetModal" onclick="closeSheet()">
     <div class="close-overlay">돌아가기</div>
-    <img id="modalImg" src="">
+    <img id="modalImg" src="" onerror="handleImgFallback(this)">
     <div id="modalCaption" style="margin-top: 20px; font-weight: 800; font-size: 1.2rem;"></div>
 </div>
 
@@ -99,6 +99,18 @@
 </div>
 
 <script>
+    // 💡 이미지 .jpg / .JPG 자동 변환 로직 (오류 발생 시 반대 확장자로 1회 재시도)
+    function handleImgFallback(img) {
+        if (!img.hasAttribute('data-retried')) {
+            img.setAttribute('data-retried', 'true');
+            if (img.src.includes('.jpg')) {
+                img.src = img.src.replace('.jpg', '.JPG');
+            } else if (img.src.includes('.JPG')) {
+                img.src = img.src.replace('.JPG', '.jpg');
+            }
+        }
+    }
+
     const setlists = [
         {
             date: "2026년 5월 17일",
@@ -228,7 +240,8 @@
                 <div id="expand-${idx}" class="expand-area">
                     ${set.songs.map(s => {
                         const path = s.sheet || globalSheetMap[s.title];
-                        return path ? `<p style="font-weight:700; margin-bottom:10px; color:var(--main-accent);">${s.title}</p><img src="${path}" class="sheet-thumb" onclick="openSheet('${path}', '${s.title}')">` : '';
+                        // 썸네일 이미지에도 onerror 속성 부여
+                        return path ? `<p style="font-weight:700; margin-bottom:10px; color:var(--main-accent);">${s.title}</p><img src="${path}" class="sheet-thumb" onerror="handleImgFallback(this)" onclick="openSheet(this.src, '${s.title}')">` : '';
                     }).join('')}
                 </div>
             </div>`;
@@ -243,7 +256,9 @@
     }
 
     function openSheet(path, title) {
-        document.getElementById('modalImg').src = path;
+        const modalImg = document.getElementById('modalImg');
+        modalImg.removeAttribute('data-retried'); // 새로운 사진 띄울 때 재시도 기록 초기화
+        modalImg.src = path;
         document.getElementById('modalCaption').innerText = title;
         document.getElementById('sheetModal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
