@@ -46,8 +46,8 @@
         .song-comment { font-size: 0.9rem; color: var(--main-muted); margin-top: 6px; font-weight: 500; }
         .transition-note { display: inline-block; margin-top: 8px; background-color: var(--alert-bg); color: var(--alert-text); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; border: 1px solid var(--alert-border); }
 
-        .action-btns { display: flex; gap: 10px; }
-        .icon-btn { background: #f1f5f9; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 12px; text-decoration: none; color: var(--main-text); font-weight: 700; transition: all 0.2s ease; cursor: pointer; border: none; }
+        .action-btns { display: flex; gap: 8px; }
+        .icon-btn { background: #f1f5f9; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 12px; text-decoration: none; color: var(--main-text); font-weight: 800; font-size: 1rem; transition: all 0.2s ease; cursor: pointer; border: none; }
         .icon-btn:hover { background: var(--main-accent); color: white; }
 
         .expand-area { margin-top: 2rem; padding-top: 2rem; border-top: 2px dashed var(--main-border); display: none; }
@@ -99,7 +99,7 @@
 </div>
 
 <script>
-    // 💡 이미지 .jpg / .JPG 자동 변환 로직 (오류 발생 시 반대 확장자로 1회 재시도)
+    // 💡 이미지 .jpg / .JPG 자동 변환 로직
     function handleImgFallback(img) {
         if (!img.hasAttribute('data-retried')) {
             img.setAttribute('data-retried', 'true');
@@ -117,9 +117,30 @@
             songs: [
                 { title: "임재", key: "A", sheet: "scores/임재.jpg" },
                 { title: "손을높이들고", key: "A", sheet: "scores/손을높이들고.jpg" },
-                { title: "찬양하세", key: "A", sheet: "scores/찬양하세.jpg" },
-                { title: "마음속에근심있는사람", key: "G", sheet: "scores/마음속에근심있는사람.jpg" },
-                { title: "지금까지에벤에셀", key: "G", sheet: "scores/지금까지에벤에셀.jpg" }
+                { 
+                    title: "찬양하세", 
+                    key: "A / G", 
+                    sheets: [
+                        { label: "A", path: "scores/찬양하세a.jpg" },
+                        { label: "G", path: "scores/찬양하세g.jpg" }
+                    ] 
+                },
+                { 
+                    title: "마음속에근심있는사람", 
+                    key: "A / G", 
+                    sheets: [
+                        { label: "A", path: "scores/마음속에근심있는사람a.jpg" },
+                        { label: "G", path: "scores/마음속에근심있는사람g.jpg" }
+                    ] 
+                },
+                { 
+                    title: "지금까지에벤에셀", 
+                    key: "A / G", 
+                    sheets: [
+                        { label: "A", path: "scores/지금까지에벤에셀a.jpg" },
+                        { label: "G", path: "scores/지금까지에벤에셀g.jpg" }
+                    ] 
+                }
             ]
         },
         {
@@ -279,15 +300,39 @@
         { date: "2023년 12월 8일", songs: [{ title: "축복송", key: "D" }, { title: "주예수내맘에", key: "Ab" }, { title: "부르신곳에서", key: "E" }] }
     ];
 
+    // 라이브러리 목록 생성을 위한 매핑 로직 개선 (다중 키 지원)
     const globalSheetMap = {};
-    setlists.forEach(set => set.songs.forEach(s => { if (s.sheet && !globalSheetMap[s.title]) globalSheetMap[s.title] = s.sheet; }));
+    setlists.forEach(set => set.songs.forEach(s => {
+        if (s.sheets) {
+            s.sheets.forEach(sh => {
+                const titleKey = `${s.title} (${sh.label})`;
+                if (!globalSheetMap[titleKey]) globalSheetMap[titleKey] = sh.path;
+            });
+        } else if (s.sheet && !globalSheetMap[s.title]) {
+            globalSheetMap[s.title] = s.sheet;
+        }
+    }));
 
     function renderSetlists(data) {
         const container = document.getElementById('setlist-container');
         container.innerHTML = data.map((set, idx) => {
-            const hasSheets = set.songs.some(s => s.sheet || globalSheetMap[s.title]);
+            const hasSheets = set.songs.some(s => s.sheet || s.sheets || globalSheetMap[s.title]);
+            
             const songsHtml = set.songs.map((s) => {
-                const sheetPath = s.sheet || globalSheetMap[s.title];
+                let sheetBtns = '';
+                
+                // 다중 키 악보 렌더링
+                if (s.sheets) {
+                    sheetBtns = s.sheets.map(sh => 
+                        `<div onclick="openSheet('${sh.path}', '${s.title} (${sh.label} Key)')" class="icon-btn" title="${sh.label}코드 악보">${sh.label}</div>`
+                    ).join('');
+                } else {
+                    const sheetPath = s.sheet || globalSheetMap[s.title];
+                    if (sheetPath) {
+                        sheetBtns = `<div onclick="openSheet('${sheetPath}', '${s.title}')" class="icon-btn" title="악보">🎼</div>`;
+                    }
+                }
+
                 return `
                 <div class="song-row">
                     <div style="flex: 1; padding-right: 15px;">
@@ -300,7 +345,7 @@
                     </div>
                     <div class="action-btns">
                         <a href="https://www.youtube.com/results?search_query=${s.title} 찬양" target="_blank" class="icon-btn" title="유튜브">▶</a>
-                        ${sheetPath ? `<div onclick="openSheet('${sheetPath}', '${s.title}')" class="icon-btn" title="악보">🎼</div>` : ''}
+                        ${sheetBtns}
                     </div>
                 </div>`;
             }).join('');
@@ -312,9 +357,18 @@
                 ${hasSheets ? `<button class="btn" style="width:100%; margin-top:2rem; background: #f1f5f9; color: #475569;" onclick="toggleExpand(${idx})">이미지로 악보 모두 펼치기 🖼️</button>` : ''}
                 <div id="expand-${idx}" class="expand-area">
                     ${set.songs.map(s => {
-                        const path = s.sheet || globalSheetMap[s.title];
-                        // 썸네일 이미지에도 onerror 속성 부여
-                        return path ? `<p style="font-weight:700; margin-bottom:10px; color:var(--main-accent);">${s.title}</p><img src="${path}" class="sheet-thumb" onerror="handleImgFallback(this)" onclick="openSheet(this.src, '${s.title}')">` : '';
+                        // 다중 키 이미지 펼치기 렌더링
+                        if (s.sheets) {
+                            return s.sheets.map(sh => 
+                                `<p style="font-weight:700; margin-bottom:10px; color:var(--main-accent);">${s.title} (${sh.label} Key)</p>
+                                 <img src="${sh.path}" class="sheet-thumb" onerror="handleImgFallback(this)" onclick="openSheet(this.src, '${s.title} (${sh.label} Key)')">`
+                            ).join('');
+                        } else {
+                            const path = s.sheet || globalSheetMap[s.title];
+                            return path ? 
+                                `<p style="font-weight:700; margin-bottom:10px; color:var(--main-accent);">${s.title}</p>
+                                 <img src="${path}" class="sheet-thumb" onerror="handleImgFallback(this)" onclick="openSheet(this.src, '${s.title}')">` : '';
+                        }
                     }).join('')}
                 </div>
             </div>`;
@@ -330,7 +384,7 @@
 
     function openSheet(path, title) {
         const modalImg = document.getElementById('modalImg');
-        modalImg.removeAttribute('data-retried'); // 새로운 사진 띄울 때 재시도 기록 초기화
+        modalImg.removeAttribute('data-retried'); 
         modalImg.src = path;
         document.getElementById('modalCaption').innerText = title;
         document.getElementById('sheetModal').style.display = 'flex';
@@ -347,7 +401,7 @@
         grid.innerHTML = Object.keys(globalSheetMap).sort().map(title => `
             <div class="library-card" onclick="openSheet('${globalSheetMap[title]}', '${title}')">
                 <div style="font-size: 2.2rem; margin-bottom: 15px;">🎼</div>
-                <div style="font-weight: 800; font-size: 1rem;">${title}</div>
+                <div style="font-weight: 800; font-size: 0.9rem;">${title}</div>
             </div>
         `).join('');
         document.getElementById('libraryModal').style.display = 'block';
